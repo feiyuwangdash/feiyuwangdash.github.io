@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do UEFA Referees Favor Players From Their Own Country? &mdash; Feiyu Wang</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../research.html">Research</a></li>
+                <li><a href="../../blogs.html" class="active">Blogs</a></li>
+                <li><a href="../../others.html">Others</a></li>
+                <li><a href="../../cv.html">CV</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="post">
+        <p class="back-link"><a href="../../blogs.html">&larr; Back to Blogs</a></p>
+
+        <h1>Do UEFA Referees Favor Players From Their Own Country? An Econometric Look at Five Seasons of Champions League and Europa League</h1>
+        <p class="entry-meta">2026-05-07 &middot; Feiyu Wang</p>
+
+        <h2>Motivation</h2>
+
+        <p>On May 6, 2026, Bayern Munich and Paris Saint-Germain met in the second leg of their UEFA Champions League semifinal. The match was officiated by <strong>João Pinheiro</strong>, a Portuguese referee. Two contentious calls late in the game went against Bayern, and the players who escaped them &mdash; <strong>Nuno Mendes</strong> and <strong>João Neves</strong> &mdash; were both Portuguese internationals. (PSG also fielded a third Portuguese starter, Vitinha.) The next morning, message boards lit up with the same suspicion fans have raised for decades: <em>did the referee just favor his countrymen?</em></p>
+
+        <p>The question is empirically tractable, and the data needed to answer it are surprisingly available. This essay reports an attempt to answer it with five seasons of UEFA Champions League and UEFA Europa League data. The short version of the answer is <strong>no, on any margin we can measure</strong>. The longer version is more interesting: a naive comparison does suggest favoritism, but the apparent effect dissolves once we account for <em>who</em> the same-country players actually are. The post is partly a result, partly a worked example of why descriptive comparisons can mislead.</p>
+
+        <h2>Data</h2>
+
+        <p>The sample is every completed UCL and UEL match from the 2021-22 season through 2025-26 (panel through 2026-05-07): <strong>1,531 matches</strong>, <strong>143 unique referees</strong> from <strong>44 countries</strong>, and <strong>47,151 player-match records</strong> spanning <strong>4,330 unique players</strong> from <strong>125 countries</strong> (Figure 1). For each match I have the referee&rsquo;s name, both teams&rsquo; rosters, and per-player counts of fouls committed, fouls drawn, yellow cards, red cards, tackles won, interceptions, and minutes played.</p>
+
+        <p>Match data are from FBref (Sports Reference), which exposes a structured per-team summary table inside each match report. Referee nationalities are from Wikidata, supplemented by a hand-curated overrides file for cases Wikidata couldn&rsquo;t disambiguate (mainly UK referees, whose Wikidata entry returns &ldquo;United Kingdom&rdquo; but whose UEFA classification is England, Scotland, Wales, or Northern Ireland; and short-form Spanish names whose Wikidata entry uses the full name). Player nationality is the FIFA-style three-letter code that FBref displays in match reports &mdash; the same code the player&rsquo;s national team would use.</p>
+
+        <figure>
+            <img src="fig1_sample.png" alt="Sample composition by season, competition, and stage type">
+            <figcaption><strong>Figure 1.</strong> Sample composition by season, competition, and stage type. The 2024-25 expansion reflects UEFA&rsquo;s switch to the 36-team Swiss format.</figcaption>
+        </figure>
+
+        <p>The treatment variable for the player-level analysis is <code>same_country</code> &mdash; an indicator equal to 1 when a player&rsquo;s nationality matches the referee&rsquo;s country, and 0 otherwise. In the 47,151 player-matches, 686 (1.5%) are same-country observations.</p>
+
+        <p>A useful caveat about the data-generating process: UEFA&rsquo;s match-officiating department explicitly avoids assigning a referee to a match between clubs from the referee&rsquo;s own country. So for any given match, neither team&rsquo;s home country is the referee&rsquo;s. Same-country <em>players</em> still appear (a Portuguese midfielder for PSG; a French defender for Real Madrid), and that&rsquo;s the variation this study uses.</p>
+
+        <figure>
+            <img src="fig_origins.png" alt="Pie charts of player origin countries vs referee countries">
+            <figcaption><strong>Figure 2.</strong> Origin-country distribution. <em>Left:</em> share of unique players in the panel (4,322 players from 125 countries). <em>Right:</em> share of unique referees in the panel (143 referees from 44 countries). Same color is used for a country across the two pies, so visually shared countries have a matching slice color.</figcaption>
+        </figure>
+
+        <p>The two pies are dominated by the same five countries &mdash; Spain, France, Germany, England, and Portugal &mdash; which together supply about a third of all players and roughly two-fifths of all referees in the panel. But the asymmetry on the edges is what matters for this study. Brazil supplies 5% of the players and <em>zero</em> referees in our 5-season panel; the Netherlands and Belgium each supply 4&ndash;5% of the players but only a handful of referees; conversely, Romania, Ukraine, and Turkey are visible on the referee pie but barely show up in the player pie. Because UCL/UEL referees come overwhelmingly from a smaller subset of countries, <strong>roughly 28% of all player-matches in this panel come from a nationality that never supplied a UEFA referee in 2021&ndash;26</strong> (Brazilian, Argentine, Moroccan, Nigerian, Ivorian, Uruguayan, Senegalese, and US players make up most of this group). For these players the same-country cell is a structural impossibility &mdash; they appear only on the &ldquo;different-country&rdquo; side of the comparison. The set of players who can ever be in the same-country cell is, by construction, dominated by the major UEFA football nations.</p>
+
+        <h2>Descriptive evidence</h2>
+
+        <p>The average UCL/UEL player commits 1.345 fouls per 90 minutes. There is substantial heterogeneity by nationality (Figure 3): Cameroonian players in our sample average 2.86 fouls per 90, while Canadians average 0.91 &mdash; a 3&times; spread that mostly reflects which playing styles dominate which national-team pipelines. Crucially, <strong>the major UEFA football nations cluster near the average</strong>: Spain 1.39, the Netherlands 1.34, England 1.31, Italy 1.30, Portugal 1.27, Germany 1.24, France 1.23. They are neither the most nor the least foul-prone groups in football.</p>
+
+        <figure>
+            <img src="fig2_fouls_by_nationality.png" alt="Mean fouls per 90 by nationality">
+            <figcaption><strong>Figure 3.</strong> Mean fouls committed per 90 minutes, by player nationality. Restricted to nationalities with &ge;100 player-matches. Three color groups: blue = top-tier UEFA football nations (ESP, FRA, GER, ITA, POR, ENG, NED); orange = other countries that supplied at least one UEFA referee in our 5-season panel; grey = countries whose players can never be in the same-country cell because their country never supplied a UEFA referee.</figcaption>
+        </figure>
+
+        <p>Pooling all 47,150 player-matches with positive minutes and splitting on <code>same_country</code>, same-country players commit roughly <strong>20% fewer fouls per 90 minutes</strong> than other players (Figure 4). At first read, that looks like exactly the favoritism pattern fans suspect.</p>
+
+        <figure>
+            <img src="fig6_descriptive_gap.png" alt="Naive descriptive gap in fouls per 90">
+            <figcaption><strong>Figure 4.</strong> Naive descriptive gap: mean fouls per 90 minutes, players whose nationality matches the referee vs. all other player-matches. Error bars are 95% confidence intervals on the mean.</figcaption>
+        </figure>
+
+        <p><strong>But this comparison is contaminated by something obvious in retrospect: it is comparing different sets of players, not the same player under different conditions.</strong> Players who appear in the &ldquo;same-country&rdquo; cell are systematically the players whose nationality is shared by a UEFA-Elite referee &mdash; overwhelmingly Spanish, German, French, Italian, English, Portuguese, and Dutch. Those are also the nationalities most over-represented at top clubs. Top-club starters tend to be technical, possession-style players who commit fewer fouls under any referee. The descriptive gap could be driven entirely by <em>who plays in the same-country matches</em>, not by any change in referee behavior.</p>
+
+        <p>To separate &ldquo;who&rdquo; from &ldquo;what the referee does,&rdquo; we need within-player variation.</p>
+
+        <h2>Identification: a panel fixed-effect specification</h2>
+
+        <p>The natural causal-inference framing here is a panel fixed-effect model. Letting <em>i</em> index players and <em>m</em> index matches:</p>
+
+        <p class="equation">y<sub>i,m</sub> &nbsp;=&nbsp; &alpha;<sub>i</sub> &nbsp;+&nbsp; &gamma;<sub>m</sub> &nbsp;+&nbsp; &beta; &middot; SameCountry<sub>i,m</sub> &nbsp;+&nbsp; &epsilon;<sub>i,m</sub></p>
+
+        <p>The coefficient of interest is <em>&beta;</em>. The two fixed effects absorb the obvious confounds:</p>
+
+        <ul>
+            <li><strong>&alpha;<sub>i</sub> (player FE)</strong> absorbs every time-invariant trait of the player &mdash; his typical foul rate, position, age (within-season), club&rsquo;s tactical style, his propensity to slide-tackle, and so on. The remaining variation in <code>SameCountry</code> for player <em>i</em> comes from <em>which referees he draws across his matches</em>: a Spanish midfielder is &ldquo;treated&rdquo; in matches with Spanish referees and &ldquo;untreated&rdquo; otherwise.</li>
+            <li><strong>&gamma;<sub>m</sub> (match FE)</strong> absorbs every match-level shock &mdash; the referee&rsquo;s individual leniency, the stage of the competition, the venue, the temperature, both teams&rsquo; identities, anything common to both sides of a single match. Within a match, the same-country variation is across players: in a Spanish-refereed game, three Spanish players are &ldquo;treated&rdquo; and the other 25 or so on the pitch are not.</li>
+        </ul>
+
+        <p>Standard errors are two-way clustered at (player, match): match clustering accommodates correlation across players within a chippy game, player clustering accommodates correlation in a player&rsquo;s behavior across his own matches. The treatment status varies match-by-match for each player &mdash; we identify <em>&beta;</em> from the same player&rsquo;s switching between matches with same-country and other-country referees, and from the within-match contrast between same-country and other players in the same fixture. A separate &ldquo;control group&rdquo; of matches with no same-country players would be a poor control because <em>those matches involve different clubs</em>: smaller clubs with less internationally diverse rosters, in fixtures with systematically different team strength. The within-player comparison sidesteps this entirely.</p>
+
+        <h2>Player-level results</h2>
+
+        <p>Figure 5 reports <em>&beta;</em> on <code>SameCountry</code> for three outcomes &mdash; fouls per 90, fouls drawn per 90, yellow cards per 90 &mdash; across four progressively tighter specifications.</p>
+
+        <figure>
+            <img src="fig3_fe_ladder.png" alt="Player-level coefficient across specifications">
+            <figcaption><strong>Figure 5.</strong> Player-level coefficient on <code>same_country</code> across specifications. Error bars are 95% confidence intervals; standard errors two-way clustered at (player, match).</figcaption>
+        </figure>
+
+        <p>The pattern is clean. The pooled OLS recovers the descriptive 20% gap on fouls (&beta; = &minus;0.27, p &lt; 0.01). Adding match fixed effects barely changes it (&beta; = &minus;0.22, still significant). Adding <strong>player fixed effects</strong> alone collapses the coefficient to &minus;0.05 with a standard error of 0.09 &mdash; statistically indistinguishable from zero. The full two-way fixed-effect specification gives &beta; = &minus;0.020 (SE = 0.094); the 95% confidence interval [&minus;0.20, +0.16] excludes any effect larger than &plusmn;15% of the mean foul rate.</p>
+
+        <p>The same pattern holds for fouls drawn (any benefit-of-the-doubt on contact in the player&rsquo;s favor) and for yellow cards: the descriptive gap collapses entirely once player FE are introduced. <strong>The 20% gap is selection on which players appear in the same-country cell, not refereeing.</strong></p>
+
+        <p>Figure 6 illustrates the within-player decomposition concretely. For each of 12 players who have at least three same-country matches and at least five other-country matches in the panel, the bar shows the difference between his average fouls per 90 in same-country matches and his average elsewhere. Six players show &ldquo;favoritism direction&rdquo; (Tchouam&eacute;ni &minus;0.80, Camavinga &minus;0.77, Kound&eacute; &minus;0.51, &hellip;); six show the <em>opposite</em> (Donnarumma +0.12, Griezmann +0.15, Mendy +0.63, Upamecano +0.65). The average gap across these 12 players is +0.11 &mdash; essentially zero. <strong>The signs cancel.</strong> Some players really are called for fewer fouls under their countryman; equally many are called for more. There is no systematic effect.</p>
+
+        <figure>
+            <img src="fig4_switcher.png" alt="Within-player gap in fouls per 90 for 12 players">
+            <figcaption><strong>Figure 6.</strong> Within-player gap in fouls per 90 (same-country ref minus other ref) for 12 players with sufficient observations in both cells. <em>n</em> = (other-country matches / same-country matches). Average across the 12: +0.11 fouls per 90. Signs cancel, consistent with statistical noise rather than systematic favoritism.</figcaption>
+        </figure>
+
+        <h2>Are same-country players awarded more fouls?</h2>
+
+        <p>So far the analysis has focused on fouls <em>committed</em> by same-country players. But favoritism could also work in the other direction: a referee who quietly favors his countrymen might be quicker to whistle their <em>opponents</em> for contact &mdash; awarding the same-country player a free kick, or upgrading a hard tackle to a yellow card. The hypothesis is symmetric: favoritism predicts a same-country player should commit fewer fouls <em>and</em> draw more fouls. Under that hypothesis the coefficient on <code>SameCountry</code> for fouls drawn per 90 (FBref&rsquo;s <code>fouled</code>) should be positive.</p>
+
+        <p>The middle panel of Figure 5 already shows this regression. The descriptive comparison (top of the panel, &ldquo;Pooled OLS&rdquo;) actually runs in the <em>opposite</em> direction of favoritism: same-country players draw slightly fewer fouls than other players in the raw means (&beta; = &minus;0.15, marginally significant). That&rsquo;s once again selection on whom we&rsquo;re comparing &mdash; technical, possession-style players from top clubs hold the ball less and don&rsquo;t invite contact the way a counter-attacking forward does. With player FE the descriptive gap goes to zero (&beta; = &minus;0.005, SE 0.087); with the full two-way fixed effects it flips slightly positive (+0.023, SE 0.098) but is statistically indistinguishable from zero. The 95% confidence interval at the strictest spec is roughly [&minus;0.17, +0.21], which rules out a same-country &ldquo;more fouls awarded&rdquo; effect larger than about 18% of the mean rate.</p>
+
+        <p>Yellow and red cards point the same way. The yellow-card panel of Figure 5 has &beta; = +0.017 per 90 (SE 0.047) under the 2WFE; reds are basically immeasurable at that rate, with &beta; = &minus;0.002 (SE 0.010). If favoritism worked through cards-for-contact &mdash; opponents getting booked more readily for fouling on a same-country player &mdash; the implied effects are too small to find.</p>
+
+        <p>Combining this section with the previous one: <strong>neither side of the symmetric favoritism hypothesis has support in the data.</strong> Same-country players are not whistled less when they make contact, and they are not awarded more fouls when contact is made on them. The 20% raw foul gap is a player-selection artifact, and the symmetric &ldquo;fouls drawn&rdquo; story doesn&rsquo;t survive in the data either.</p>
+
+        <h2>Team-level results</h2>
+
+        <p>A natural follow-up question: even if no individual player is favored, perhaps a team with several same-country players accumulates a small overall edge. The team-level analog of the player-level analysis regresses team-match outcomes (<code>won</code>, <code>points</code>, total fouls, total cards) on <code>n_same_country</code>, the count of the team&rsquo;s players who share nationality with the referee. The within-match comparison &mdash; the team with more same-country players vs. the team with fewer, in the same fixture &mdash; is what match fixed effects deliver. But it isn&rsquo;t enough. Top UCL/UEL clubs (Real Madrid, Manchester City, PSG, Bayern, Liverpool, Inter) have multinational rosters drawing heavily from the major UEFA football nations &mdash; exactly the nations that supply most UEFA referees. Smaller clubs have more locally sourced rosters. So within any given match, the team with more same-country players is, on average, the better-staffed side, and that quality differential <em>varies</em> across the two team rows of the match (match FE cannot absorb it).</p>
+
+        <p>To test this directly, I add a leave-one-out club win-rate as a strength control: for each (team, match) row, I compute the team&rsquo;s win rate across all <em>other</em> matches in our 5-season UCL/UEL panel &mdash; a within-sample analogue of the UEFA Club Coefficient. I also run a balanced subsample, restricting to matches where the two teams&rsquo; panel win rates are within the median absolute difference. Both adjustments produce the same answer (Figure 7).</p>
+
+        <p>Specification (1) shows a within-match win-rate advantage of about 6 percentage points per extra same-country player. Specification (2), adding the leave-one-out quality control, collapses it to a third of that, with a standard error that engulfs zero. The balanced subsample (3) is similarly null. The same pattern holds for goals scored and goal difference &mdash; quantities the referee can&rsquo;t directly produce, which would not be expected to move under genuine refereeing favoritism &mdash; suggesting that the apparent (1) effect was always squad quality showing through, never a referee channel. Outcomes the referee <em>does</em> produce (fouls, yellow cards, red cards) are statistically zero in every specification.</p>
+
+        <figure>
+            <img src="fig5_team_robustness.png" alt="Team-level coefficient across specifications">
+            <figcaption><strong>Figure 7.</strong> Team-level coefficient on <code>n_same_country</code> across three specifications: (1) within-match comparison only, (2) adding the team&rsquo;s leave-one-out panel win rate as a quality proxy, (3) restricting to balanced matches. Outcomes the referee directly produces (right panel) show no systematic effect under any specification. Outcomes the referee mostly cannot produce (left panel) appear under (1), then collapse under (2) and (3) once team strength is held fixed.</figcaption>
+        </figure>
+
+        <h2>Group stage vs knockout rounds</h2>
+
+        <p>One natural worry: maybe favoritism only surfaces in high-stakes games &mdash; the knockout rounds, where a single decision can end a season. The 1,531 matches split into 1,152 group / league-phase fixtures and 379 knockout fixtures (Round of 16 onward, plus the Swiss-format knockout play-offs). Splitting the player-level two-way FE specification on this distinction (Figure 8):</p>
+
+        <figure>
+            <img src="fig_by_stage.png" alt="Player-level β coefficients in group/league phase vs knockout subsamples">
+            <figcaption><strong>Figure 8.</strong> Player-level 2WFE coefficient on <code>same_country</code> in the group / league-phase subsample (1,152 matches, blue circles) versus the knockout subsample (379 matches, orange squares). Whiskers are 95% confidence intervals. Standard errors two-way clustered at (player, match). The two stages produce statistically indistinguishable estimates on every outcome.</figcaption>
+        </figure>
+
+        <p>No sign of differential favoritism in knockouts. Every knockout coefficient is within one standard error of zero, and the formal interaction test (a single panel with <code>same_country &times; is_knockout</code>) yields an interaction coefficient indistinguishable from zero on every outcome. The knockout point estimates lean very slightly in the favoritism direction for cards (red &minus;0.011, yellow &minus;0.035) but the standard errors are too wide to call. With ~240 same-country observations in knockouts, we would only detect effects roughly twice as large as our group-stage detection threshold; any subtle KO-only favoritism is below it. The team-level robustness specifications, run separately on each subsample, also collapse to null in both stages once club strength is held fixed.</p>
+
+        <h2>What about subjective decisions only?</h2>
+
+        <p>A reasonable fallback hypothesis: refs may not change <em>total</em> fouls &mdash; those are mostly clear contacts that any reasonable referee would whistle &mdash; but they might shade the discretionary decisions. To test this on what the data allows, I re-ran the player-level 2WFE on the most discretionary outcomes available: yellow-card rate, the binary &ldquo;had a yellow,&rdquo; red-card rate, the binary &ldquo;had a red,&rdquo; and the tackle-call rate (<code>fouls / (fouls + tackles_won)</code> &mdash; the share of attempted defensive actions whistled as fouls). I also split the sample by stage type (group/league phase vs. knockout rounds), since one might expect favoritism to surface where stakes are highest.</p>
+
+        <p>None of these moves the picture (Figure 9). Every coefficient&rsquo;s 95% confidence interval comfortably crosses zero, on every outcome. The knockout-only subsample (379 matches) gives the same null as the full panel, with somewhat larger standard errors due to the smaller cell size. There is no statistically detectable favoritism on the discretionary margin either, in either stage of the competition.</p>
+
+        <figure>
+            <img src="fig_subjective.png" alt="Player-level β coefficients on discretionary outcomes">
+            <figcaption><strong>Figure 9.</strong> Player-level two-way fixed-effect coefficient on <code>same_country</code> for the most discretionary outcomes available: yellow- and red-card rates (and their binary &ldquo;had a card&rdquo; analogues), plus the tackle-call rate (the share of attempted defensive actions whistled as fouls). Whiskers are 95% confidence intervals; standard errors two-way clustered at (player, match). Favoritism would predict negative coefficients on cards and on the tackle-call rate; the data do not.</figcaption>
+        </figure>
+
+        <p>The data we have don&rsquo;t include penalty awards or &ldquo;advantage played&rdquo; calls &mdash; those would be the cleanest tests. A future extension using a source that exposes these (FotMob, API-Football, or a manual coding of match commentary) would close that gap. But for everything FBref shows, the answer is the same.</p>
+
+        <h2>Limitations</h2>
+
+        <p>A few caveats that should temper the strength of the conclusion:</p>
+
+        <ul>
+            <li><strong>The data don&rsquo;t capture penalty awards or advantage decisions.</strong> These are the most discretionary calls a referee makes, and the most plausible channel for favoritism if it exists.</li>
+            <li><strong>Same-country at the <em>match-officials</em> level is not tested.</strong> Some controversial calls involve VAR or AR1/AR2, who are also identifiable from the match meta. If favoritism exists, it might be at the team-of-officials level, not just the head referee. A panel that codes any-match-official-shares-nationality would be more powerful.</li>
+            <li><strong>Referee assignment is not fully random.</strong> UEFA balances referee experience against match importance, so a Slavko Vin&ccaron;i&ccaron; or a Cl&eacute;ment Turpin disproportionately referees high-stakes matches. This affects the <em>level</em> of foul rates we observe but not the within-player or within-match contrasts we use for identification.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+
+        <p>Five seasons of UEFA Champions League and Europa League data &mdash; 1,531 matches, 4,330 players, 143 referees &mdash; show no statistically detectable evidence that referees call fewer fouls on, or award more fouls to, players from their own country. The 20% descriptive gap that appears in raw means is a selection artifact: same-country players are disproportionately the kind of players (top-club starters from major football nations) who commit fewer fouls under any referee. Once you compare the same player to himself across matches with different referees, the gap is gone. A team-level &ldquo;more same-country players &rarr; more wins&rdquo; effect appears at first but is fully explained by squad quality once we control for it.</p>
+
+        <p>The Bayern&ndash;PSG anecdote is real; the controversial calls happened. But in the broader sample, those calls don&rsquo;t add up to a systematic pattern, and the apparent fan-eye pattern is an artifact of which kinds of players are eligible to be in the same-country cell at all. If there is favoritism, it lives in the channels we can&rsquo;t measure &mdash; penalty awards, advantage played, the soft yellows you can argue about &mdash; and a future iteration of this exercise might find it. For now, the more interesting story is methodological: how easily a 20% raw gap dissolves once you account for <em>whom</em> you&rsquo;re actually comparing.</p>
+
+        <hr>
+
+        <p class="footer-meta"><em>Note: this article was developed with the help of an AI assistant for the data pipeline, exploratory analysis, and drafting. All design choices, interpretation, and final wording are mine.</em></p>
+
+    </main>
+    <script src="../../js/script.js"></script>
+</body>
+</html>
