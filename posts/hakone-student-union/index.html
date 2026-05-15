@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why the Fastest Individuals Make the Slowest Team &mdash; Feiyu Wang</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../research.html">Research</a></li>
+                <li><a href="../../blogs.html" class="active">Blogs</a></li>
+                <li><a href="../../others.html">Others</a></li>
+                <li><a href="../../cv.html">CV</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="post">
+        <p class="back-link"><a href="../../blogs.html">&larr; Back to Blogs</a></p>
+
+        <h1>Why the Fastest Individuals Make the Slowest Team: Selection-on-Noise in the Hakone Ekiden Union Team</h1>
+        <p class="entry-meta">2026-05-14 &middot; Feiyu Wang</p>
+
+        <h2>Motivation</h2>
+
+        <figure>
+            <img src="fig0_hakone.jpg" alt="Runners crossing the Kowakidani mountain checkpoint during the 86th Hakone Ekiden, January 2010">
+            <figcaption>Runners crossing the Kowakidani mountain checkpoint during the 86th Hakone Ekiden, January 2010. Photo: Cassiopeia sweet, public domain (Wikimedia Commons).</figcaption>
+        </figure>
+
+        <p>The <strong>Hakone Ekiden</strong> (箱根駅伝) is one of the most popular sporting events in Japan. Twenty university teams race a 217-km, two-day relay every January 2nd and 3rd, watched by tens of millions on live national television. Alongside those twenty teams there's a peculiar 21st: the <strong>Kanto Student Union</strong> (関東学生連合). It doesn't represent any college, it doesn't compete for an official ranking, it doesn't earn anyone a place in next year's race. It just runs.</p>
+
+        <p>The team is made of the ten fastest individual finishers from the prior October qualifier whose own universities did not advance. On paper this should be a strong squad: their combined qualifier times routinely beat every team that <em>did</em> qualify. In practice they almost always finish near the bottom. <strong>Why does a team built from the fastest available runners run slower than the teams those runners just beat?</strong></p>
+
+        <p>The fan answer is psychological: ten strangers can't run like a team. The data says <strong>no &mdash; it's nothing about mentality</strong>. When the same runner appears on both the union team and their own college's team in different years, their pace is essentially the same. So the union experience itself isn't the problem. <strong>About half the remaining gap is a &ldquo;lucky-day&rdquo; effect</strong> &mdash; the qualifier picks runners on their best day, and best days don't repeat. <strong>The other half is a persistent runner-level gap</strong> whose exact mechanism the data can't pin down &mdash; plausible guesses are specialized Hakone training, leg-matching by a familiar coach, course experience, or some mix.</p>
+
+        <h2>Background: the race and the team</h2>
+
+        <p>The Hakone Ekiden is a two-day, 217-km relay held every January 2nd and 3rd, from central Tokyo to the mountain resort of Hakone and back. Twenty university teams send ten runners each, one runner per leg of 18&ndash;23 km. The course is tough: leg 5 climbs about 900 meters of elevation through the mountains, leg 6 drops back down, and leg 9 is the longest at 23 km. Each school picks ten runners from a roster of sixteen, and the team's total time across all ten legs sets the official ranking. The race is one of the most-watched sports events in Japan &mdash; about twelve hours of live national TV over the two days &mdash; and a top-ten finish, which earns automatic entry to the next year's race, is what every Kanto-region college distance team aims for. The race has been held every year since 1920.</p>
+
+        <p>Ten of the twenty teams qualify automatically as the previous year's top-ten finishers (the &ldquo;seeded&rdquo; schools). The other ten earn their spot through a qualifying race the prior October &mdash; a flat half-marathon (21 km) where each school enters up to twelve runners, and the sum of the fastest ten times decides who advances.</p>
+
+        <p>That qualifier is what creates the team this post is about. From 2015 on (the modern era), the rule is: take the ten fastest <em>individual</em> finishers at the qualifier whose universities did <em>not</em> advance. They form the Kanto Student Union team and run Hakone as an open-participation entry &mdash; their time is recorded, but they don't get an official ranking. The ten members come from ten different schools, none Hakone-bound, and many with small distance-running programs that have rarely or never made Hakone. They have no shared coach, no shared training, and no coordinated leg plan beyond pairing each runner with a leg roughly matching their qualifier distance.</p>
+
+        <h2>Descriptive fact: union teams finish near the bottom</h2>
+
+        <p>Figure 1 plots the union team's rank across two comparisons. Teal dots: rank if I sum the ten union members' individual qualifier times and compare to the qualified schools' team aggregates. Red dots: actual rank in Hakone among the qualifier-admitted schools plus itself.</p>
+
+        <figure>
+            <img src="fig1_rank_gap.png" alt="Rank-gap chart: SU rank by qualifier composite (teal) vs by actual Hakone finish (red), 6 editions">
+            <figcaption><strong>Figure 1.</strong> Kanto Student Union: top by qualifier, bottom by Hakone. Teal dots are the union team's rank if I sum its ten members' individual qualifier times and compare to the qualified schools' team aggregates. Red dots are its actual rank in Hakone among the qualifier-admitted schools plus itself. Source: kgrr.org + Japanese Wikipedia. Full individual qualifier data is only available from the 96th edition onward, so this figure covers the 96th&ndash;102nd editions.</figcaption>
+        </figure>
+
+        <p>The pattern is striking. Across the six editions plotted, <strong>the union team would have been #1 by qualifier total in two years, #2 in three, and #3 in one</strong> &mdash; the top of the eleven-team comparison. Its actual Hakone finishes in those same six years were 4, 7, 7, 9, 10, and 10. <strong>Every single year, the team finishes worse than its qualifier rank predicts.</strong> The arrows all point the same way. The average drop is about six places.</p>
+
+        <p>The same pattern shows up in absolute time. Figure 2 plots the gap, in minutes, between the union team's Hakone finishing time and the average finishing time of the qualifier-admitted schools that year. Positive means slower.</p>
+
+        <figure>
+            <img src="fig2_time_gap.png" alt="Bar chart of SU's Hakone time minus admitted-school average, 11 editions">
+            <figcaption><strong>Figure 2.</strong> Union team's Hakone time minus the average Hakone time of the ten qualifier-admitted schools that year, in minutes. Positive means slower. n=11.</figcaption>
+        </figure>
+
+        <p>The average gap is +4:55 across the 11 modern editions (t-test p &asymp; 0.044, Wilcoxon p &asymp; 0.051). Most years are positive, but two &mdash; the 92nd (2016) and 98th (2022) &mdash; have the union team beating the admitted-school average. The pattern is there on average, but it's not uniform.</p>
+
+        <p>The 99th edition (Figure 3) is the cleanest case. The ten union members' combined qualifier time was 10:34:31 &mdash; <em>faster than every actual admitted school</em> (which ran 10:40 to 10:48). They would have been #1 of 11 going in. They finished 10th of 11.</p>
+
+        <figure>
+            <img src="fig3_99th_case.png" alt="Slope chart for the 99th edition: rank by qualifier composite vs by Hakone time">
+            <figcaption><strong>Figure 3.</strong> 99th edition, 2023. Each line connects a team's rank by qualifier composite (left) to its rank by actual Hakone finish (right). The union team (red, bold) drops from #1 of 11 to #10 of 11 across the two months separating the qualifier from Hakone.</figcaption>
+        </figure>
+
+        <p>So the basic fact is solid: the team really does finish far below where its qualifier performance predicts. The natural first question is whether wearing the union bib itself is the problem &mdash; the fan story about mentality, cohesion, and ten strangers running together.</p>
+
+        <h2>Within-individual identification: is it the union bib?</h2>
+
+        <p>The most direct test of the fan story is to find runners who appeared on both the union team and their own college's Hakone team in different years, and compare their pace. If wearing the union bib itself slows you down &mdash; psychological cohesion, leg-fit problems, coaching mismatch &mdash; then the same runner should be slower on the union team than on their college team.</p>
+
+        <p>Sixteen runners in the modern era show up on both teams, giving twenty (runner, year) pair observations. I run this panel regression on runner-leg observations:</p>
+
+        <p class="equation">pace<sub>i,t,leg</sub> &nbsp;=&nbsp; &mu;<sub>i</sub> &nbsp;+&nbsp; &alpha;<sub>leg</sub> &nbsp;+&nbsp; &gamma;<sub>t</sub> &nbsp;+&nbsp; &lambda;<sub>year(i,t)</sub> &nbsp;+&nbsp; &beta; &middot; Union<sub>i,t</sub> &nbsp;+&nbsp; &epsilon;<sub>i,t,leg</sub></p>
+
+        <p>where &mu;<sub>i</sub> is each runner's typical Hakone-leg pace, &alpha;<sub>leg</sub> absorbs leg difficulty, &gamma;<sub>t</sub> absorbs the year of the race, &lambda;<sub>year(i,t)</sub> absorbs the runner's <em>school year</em> at time t (freshman through senior, plus master's), and Union<sub>i,t</sub> is one for runner-years on the union team and zero on admitted-school teams. The school-year FE matters because Japanese college distance runners get a lot faster between year 1 and year 4, and a runner's union-to-college switch usually happens one or two school years apart. Without &lambda;, the within-runner estimate would mix up the union-vs-college comparison with natural improvement. Standard errors are clustered at the edition level.</p>
+
+        <p>Figure 4 shows three specifications side by side as a coefficient plot.</p>
+
+        <figure>
+            <img src="fig08_did_specs.png" alt="Coefficient plot of three specifications, error bars 95 CI">
+            <figcaption><strong>Figure 4.</strong> Estimated &beta; (extra seconds per kilometer on the union team vs control) across three specifications. The cross-runner gap (top) survives adding school-year FE essentially unchanged (middle), then collapses to a slightly negative value when runner fixed effects are added (bottom). Error bars are 95% confidence intervals; SE clustered on edition.</figcaption>
+        </figure>
+
+        <p>The estimate drops from +2.51 sec/km to &minus;1.13 sec/km when I add runner fixed effects on top of leg, edition, and school-year. <strong>The fan story doesn't hold.</strong> The within-runner estimate is actually slightly <em>negative</em> &mdash; the same person runs a touch faster on the union team than on their college team in a different year &mdash; but with cluster-SE 0.98 and t = &minus;1.16 it can't be told apart from zero. With only twenty within-runner pairs I can't rule out a real effect of about 1 sec/km in either direction, but I can rule out the union-experience-itself story as the main driver. The within-runner sample is n = 1,186 leg observations, limited to editions 96 onward where I have school-year information.</p>
+
+        <p>Figure 5 shows the 16 within-runner runners one at a time. Each runner has a red dot for their union-team leg pace and a teal dot for their college-team leg pace in a different year. About two-thirds move left (faster on their college team), one-third move right.</p>
+
+        <figure>
+            <img src="fig4_within_runner.png" alt="Within-runner pace comparison: 16 runners' union-team pace vs college-team pace">
+            <figcaption><strong>Figure 5.</strong> Within-runner identification: 16 runners observed once on the union team and again (one or more times) on their own college's Hakone team. Asterisks (*) mark cases where the leg number was the same in both years &mdash; the cleanest comparisons. The mean gap is small.</figcaption>
+        </figure>
+
+        <p>So the union bib isn't doing anything to the runners on race day. But the team-level gap is still there in the cross-runner data: +2.51 sec/km, about five minutes per race. That gap has to come from somewhere. The next sections walk through three possible explanations.</p>
+
+        <h2>First guess: are admitted teams sandbagging the qualifier?</h2>
+
+        <p>The first guess is that the qualifier comparison isn't fair to begin with. Maybe qualified teams hold their best runners out of the qualifier and save them for Hakone. If true, the union team's qualifier-day &ldquo;lead&rdquo; is fake, and there's no real puzzle. Matching runner names across the qualifier and Hakone leg results: about <strong>65% of each admitted school's Hakone leg runners also raced the qualifier</strong> (63% were in their team's qualifier top 10). So each team rotates about three or four runners out of ten between the two races.</p>
+
+        <p>Is that rotation strategic ace-saving, or something more ordinary like injury or scheduling? Figure 6 compares the lifetime half-marathon PBs of three groups: runners who raced both the qualifier and Hakone, runners who raced Hakone but skipped the qualifier (the &ldquo;Hakone-only&rdquo; substitutes), and runners who raced the qualifier but didn't get a Hakone leg.</p>
+
+        <figure>
+            <img src="fig05_pb_rotation.png" alt="Mean half-marathon PB by group: both, Hakone-only, qualifier-only">
+            <figcaption><strong>Figure 6.</strong> Mean lifetime half-marathon PB by group, admitted-school runners only. The two rotation groups (Hakone-only and qualifier-only) have essentially identical PBs (Welch t = 0.47, n.s.). The team's <em>best</em> runners race both events.</figcaption>
+        </figure>
+
+        <p>The two rotation groups have essentially identical PBs (1:04:18 vs 1:04:12). The team's <em>best</em> runners (mean PB 1:03:35) race in both events &mdash; they are not held out for Hakone. The rotation is among the team's mid-tier runners, and the two pools have the same talent on paper. So admitted teams aren't sandbagging: they run their best lineup in the qualifier, and the Hakone-day rotation is driven by routine logistics (injury, recent training load, scheduling), not by hiding aces.</p>
+
+        <p>So the qualifier comparison really is fair. The puzzle is real: a team made of qualifier-top-10 individuals does run slower in Hakone than the schools they just beat. Why?</p>
+
+        <h2>Second guess: lucky-day selection</h2>
+
+        <p>The next guess is statistical. The union team picks the top 10 from about 400 individual finishers across all non-advancing schools. Each admitted school picks its top 10 from a roster of about 16. Both rules sort on the same number &mdash; qualifier time &mdash; but at very different scales.</p>
+
+        <p>When you pick the top of a noisy single race, you tend to pick people who had a good day. A runner's qualifier time is their normal speed plus race-day luck (warm-up, sleep, weather, taper). If you take the top 10 of 400, you mostly pick runners who got lucky that day. The next race is a fresh roll of the dice, with average luck. So their times drift back toward their normal speed. Economists call this <em>regression to the mean</em>; in plain English, the lucky day doesn't repeat. How much it bites depends on how hard you select: top 10 of 400 is much more extreme than top 10 of 16.</p>
+
+        <p>To probe this directly: the entry rosters list each runner's lifetime PB half-marathon, so for each runner I can compute how far above (or below) their PB they ran on qualifier day. Figure 7 plots the shares of runners falling into three bands relative to their PB.</p>
+
+        <figure>
+            <img src="fig06_qual_vs_pb.png" alt="Share of runners at PB / within 30s of PB / 60s+ above PB, union vs admitted">
+            <figcaption><strong>Figure 7.</strong> Share of runners whose qualifier time falls in each band relative to their lifetime half-marathon PB. Union runners are more tightly clustered near PB (79% within 30 seconds) than admitted-school runners (64%), and have a smaller "off-day" tail. Mean qualifier &minus; PB: +26s (union) vs +39s (admitted).</figcaption>
+        </figure>
+
+        <p>Over half the runners in both groups ran their lifetime-best half-marathon on qualifier day &mdash; the fingerprint of picking on a lucky day. But union runners are <em>more tightly clustered</em> near their PB: 79% are within 30 seconds of their best, versus 64% for admitted-school runners. Admitted teams have a real tail of runners who ran the qualifier as a tune-up, an off day, or as a reserve. Union teams basically don't, because the selection rule filters those runners out.</p>
+
+        <p>A bit of math says how much this matters. If race-day luck is roughly bell-curve shaped with spread &sigma;, picking the top K out of N runners biases their average qualifier time downward by about &sigma; &middot; &Phi;<sup>&minus;1</sup>(1 &minus; K/N). For an admitted team's top 3 of 16 (K/N = 19%), that's about &minus;0.85&sigma;. For union top 10 of 400 (K/N = 2.5%), it's about &minus;2.0&sigma;. The ratio is about 2.3&times;. I can check this in the data: comparing each admitted school's top 3 to its runners ranked 4 and below in the same qualifier, the top-3 group runs about +0.58 sec/km slower in Hakone than their own teammates. Scaling by 2.3 gives roughly +1.3 sec/km of lucky-day drift-back for the union team &mdash; about half of the cross-runner Hakone-pace gap of +2.5 sec/km.</p>
+
+        <p>So lucky-day selection accounts for roughly half the gap, with both theory and the placebo data backing it. What about the other half?</p>
+
+        <h2>Third guess: specialized training and coaching</h2>
+
+        <p>By process of elimination, the other half is a <em>persistent runner-level gap</em>: something that follows the runner around &mdash; not the union experience itself (Section 5 ruled that out), and not lucky-day statistics (Section 7 accounts for only half). The within-runner FE drop from +2.51 to &minus;1.13 says &ldquo;this is a between-runner characteristic&rdquo;; it does not say what that characteristic is.</p>
+
+        <p>One thing the data does say cleanly: it isn't raw speed. Union runners' lifetime half-marathon PBs are if anything <em>faster</em> than admitted-school runners' (1:03:49 vs 1:04:12, p &lt; 0.01). So whatever the runner FE absorbs is Hakone-specific or program-specific, not generic fitness.</p>
+
+        <p>Plausible candidates, none of which the data identifies separately:</p>
+
+        <ul>
+            <li><strong>Specialized Hakone training.</strong> Admitted teams spend three months drilling this exact race &mdash; the same 18&ndash;23 km legs, the same uphill and downhill course, the same January taper. The union runners' home programs typically don't, because their universities aren't Hakone-bound. By the time race day arrives, the admitted-team runners are tuned for this format and the union runners aren't.</li>
+            <li><strong>Coach knows who fits which leg.</strong> Each admitted-team coach has seen their runners train for months and knows who handles the mountain (leg 5), who anchors well (leg 10), who can push the flat early legs. The union team has no such institutional memory. Each runner is assigned a leg roughly matching their qualifier distance, but there is no coach who has actually seen them race Hakone-shaped courses and can match strengths to legs.</li>
+            <li><strong>Familiar coach, familiar program.</strong> A runner's own college coach has been with them for one to four years &mdash; they know each runner's pacing strategy, their typical weak point on race day, their warm-up routine. The union team's coaching is ad hoc.</li>
+            <li><strong>Support infrastructure.</strong> Strong distance-running programs have physios, nutritionists, sports-science staff, and depth in the training group that smaller programs don't.</li>
+        </ul>
+
+        <p>All four of these are runner-level characteristics in the sense the regression needs: they follow the runner around year over year, they're absent on a union team year, and present on a college team year &mdash; except that I can't observe any of them directly in my data. The within-runner test identifies the <em>category</em> (it's runner-level, not team-day) but cannot identify the specific channel.</p>
+
+        <h2>Conclusion</h2>
+
+        <p>The eleven-edition team-level Hakone gap of about five minutes per race is real and reproducible. The within-runner test rules out the union experience itself as the cause: the same runner runs about the same pace on the union team and on their own college team. So the gap is something between runners, not between situations. About half is mechanical, from lucky-day selection that the qualifier rule mechanically creates. The other half is a persistent runner-level gap whose channel the data can't identify directly, though specialized Hakone training and coaching familiarity are the natural guesses. The race-day mentality story turns out to be the smallest piece of the answer.</p>
+
+        <p>A few honest qualifications. The within-runner switch sample is small: only twenty (runner, year) pairs span an SU year and a college-team year for the same individual, so the within-runner &beta; has a wide standard error (cluster-SE 0.98 on edition). A real team-type effect of about 1 sec/km in either direction wouldn't be statistically detectable, and the &ldquo;race-day team effect is small or zero&rdquo; reading is provisional pending more data. The 50&nbsp;/&nbsp;50 split between the two non-mentality channels is approximate &mdash; the order-statistic argument assumes bell-curve race-day luck, and the between-runner piece inherits the same uncertainty; the qualitative claim &ldquo;structural &gt; team-type&rdquo; is robust but the specific percentages aren't. And the runner-level half isn't pinned down to any one mechanism: the within-runner FE design tells me the &ldquo;other half&rdquo; is a runner-level characteristic and not a team-day treatment, but it cannot separate specialized Hakone training from familiar coaching from leg-matching from course experience from support infrastructure. Calling out specialized training and coaching as the leading candidates is a reasonable guess, not an identified claim.</p>
+
+        <p>The general point: when a group is defined by who scored highest on a single noisy measurement, that group's next score will, on average, look worse, and a big chunk of any apparent treatment effect is mechanical. The same caveat applies to peer effects in classrooms, mutual-fund manager skill, draft-pick value, and the sophomore slump. The Kanto Student Union is an unusually clean case because the selection rule is transparent and the counterfactual &mdash; the same person running for their own college in a different year &mdash; is observable for a useful slice of the data.</p>
+
+        <hr>
+
+        <p class="footer-meta"><em>Data sources: 関東学生陸上競技連盟 (kgrr.org) for qualifier individual results; Japanese Wikipedia for per-edition Hakone results, qualifier team aggregates, and union team rosters; entry rosters for half-marathon personal bests.</em></p>
+        <p class="footer-meta"><em>Note: this article was developed with the help of an AI assistant for the data pipeline, exploratory analysis, and drafting. All design choices, interpretation, and final wording are mine.</em></p>
+
+    </main>
+    <script src="../../js/script.js"></script>
+</body>
+</html>
