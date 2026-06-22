@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Does the Scoreline Reveal? Expected Goals and the Economics of World Cup Upsets &mdash; Feiyu Wang</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../research.html">Research</a></li>
+                <li><a href="../../blogs.html" class="active">Blogs</a></li>
+                <li><a href="../../others.html">Others</a></li>
+                <li><a href="../../cv.html">CV</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="post">
+        <p class="back-link"><a href="../../blogs.html">&larr; Back to Blogs</a></p>
+
+        <h1>What Does the Scoreline Reveal? Expected Goals and the Economics of World Cup Upsets</h1>
+        <p class="entry-meta">2026-06-22 &middot; Feiyu Wang</p>
+
+        <h2>1. A scoreline that hides more than it reveals</h2>
+
+        <figure>
+            <img src="01_match_photo.png" alt="Türkiye vs Paraguay, FIFA World Cup 2026">
+            <figcaption><strong>Figure 1.</strong> Paraguay celebrate the goal that beat Türkiye 1&ndash;0 and sent them home, FIFA World Cup 2026 (Group D) &mdash; a 0.3-xG performance defeating a 2.1-xG one. <em>Photo: Reuters.</em></figcaption>
+        </figure>
+
+        <p>On 19 June 2026, Türkiye played Paraguay in a Group D match they had to win to stay in the World Cup. The scoreline was <strong>Türkiye 0&ndash;1 Paraguay</strong>. Paraguay scored inside the second minute through a long-range strike, lost a player to a red card before half-time, and then defended for an hour with ten men. They won. Türkiye went home.</p>
+
+        <p><strong>None of that is in dispute, and none of it is unfair.</strong> The scoreline is the tournament fact: Paraguay took the three points and the place in the next round, and no amount of analysis changes that. A World Cup is decided by goals, not by chances. The scoreline is final.</p>
+
+        <p>But the scoreline is also strangely silent about how the match was actually played. Türkiye took <strong>32 shots</strong> to Paraguay&rsquo;s seven and held 78% of the ball. By expected goals &mdash; the metric this whole post is about &mdash; <strong>Türkiye created about 2.1 goals&rsquo; worth of chances to Paraguay&rsquo;s 0.3</strong> (xG here from Opta via The Analyst; this 2026 game is a motivating example, not part of the StatsBomb sample analysed below). On every measure of <em>how the game was played</em>, Türkiye dominated. On the only measure that decides the tournament, they lost.</p>
+
+        <p>So the result records something real and something incomplete at the same time. <strong>The scoreline tells us what happened. But what does it reveal about how the match was played &mdash; and what does it hide?</strong> Answering that requires a second number to set beside the score: one that measures not who won, but the quality of what each team created.</p>
+
+        <h2>2. xG as expected output</h2>
+
+        <p>That number is <strong>expected goals (xG)</strong>. It assigns every shot a probability of becoming a goal, estimated from a large history of comparable shots. A shot worth 0.30 xG is one that shots <em>like it</em> have historically been scored about 30% of the time. Add up a team&rsquo;s shot probabilities and you get its expected goals for the match: the number of goals an average team would score from those exact chances.</p>
+
+        <p>How is that probability actually generated? An xG model is a classifier trained on hundreds of thousands of past shots, each labelled goal or no-goal. For any new shot it reads off a handful of measured features and returns a fitted probability. The features that matter most are geometric &mdash; the <strong>distance</strong> to goal and the <strong>angle</strong> the two posts subtend from the ball &mdash; followed by the <strong>body part</strong> (a header is far harder than a foot from the same spot), whether the shot is a <strong>penalty</strong> (a near-fixed &asymp;0.79) or a free kick, and <strong>how the chance was created</strong> (a cut-back or through-ball is worth far more than a hopeful cross). The model used here, StatsBomb&rsquo;s, goes further and reads a &ldquo;freeze-frame&rdquo; of the instant the shot is struck: where the <strong>goalkeeper</strong> is standing and how many <strong>defenders</strong> sit between the ball and the goal. In its simplest, classic logistic-regression form, the probability is</p>
+
+        <p class="equation">xG(shot) = Pr(goal &nbsp;|&nbsp; features) = <sup>1</sup>&frasl;<sub>1 + e<sup>&minus;(&beta;<sub>0</sub> + &beta;<sub>1</sub>&middot;distance + &beta;<sub>2</sub>&middot;angle + &beta;<sub>3</sub>&middot;header + &hellip;)</sup></sub></p>
+
+        <p>and a team&rsquo;s expected goals for a match is just the sum over its shots:</p>
+
+        <p class="equation">xG<sub>team</sub> &nbsp;=&nbsp; &sum;<sub>shots i</sub> xG(shot<sub>i</sub>)</p>
+
+        <p>(Modern models swap the logistic function for gradient-boosted trees or neural nets, but the object is identical: a fitted probability per shot, summed.) A shot&rsquo;s xG is therefore not a verdict on whether a player <em>should</em> have scored &mdash; it is the historical base rate for that kind of chance.</p>
+
+        <p>This gives a clean way to organise the whole question. A match turns shots into goals, and we can read it as a short production line:</p>
+
+        <figure>
+            <img src="fig_pipeline.png" alt="Diagram: Shots to xG to Goals to Goals minus xG, with Türkiye's numbers and the identity Goals = xG + Residual">
+            <figcaption><strong>Figure 2.</strong> From shots to the scoreline. <strong>Shots</strong> are raw input (quantity); <strong>xG</strong> is quality-adjusted expected output; <strong>goals</strong> are realized output; and <strong>goals &minus; xG</strong> is the residual. The identity that organises the post is <code>Goals = xG + Residual</code>.</figcaption>
+        </figure>
+
+        <p>Each stage measures something different. <strong>Shots</strong> count raw chances without regard to quality. <strong>xG</strong> weights each shot by how dangerous it was, giving a quality-adjusted expectation. <strong>Goals</strong> are the realized output that ends up on the scoreboard. And the difference, the <strong>residual</strong> <code>goals &minus; xG</code>, is whatever separated the expectation from the result. Türkiye&rsquo;s line reads 32 &rarr; 2.1 &rarr; 0 &rarr; &minus;2.1: a lot of shooting, only moderate chance quality, no goals, and a large negative residual.</p>
+
+        <p>That identity sets up the two questions the rest of the article answers. First: <strong>is xG a credible expected-output benchmark</strong> &mdash; can we trust it as the right thing to compare goals against? And second, once we trust it: <strong>what does the residual tell us</strong> about a match that the scoreline alone does not? A benchmark is only worth having if it is accurate, so start there.</p>
+
+        <h2>3. Is xG a trustworthy benchmark?</h2>
+
+        <p>A benchmark earns trust by being right <em>on average</em> &mdash; by neither systematically over- nor under-counting goals across many matches. On that test, World Cup xG passes comfortably. Across the two most recent finished men&rsquo;s tournaments (2018 and 2022 &mdash; 128 matches, 3,120 non-shootout shots), teams scored <strong>326 goals against 328.6 xG</strong>, a ratio of <strong>0.992</strong>. Over thousands of shots, the benchmark is off by less than three goals.</p>
+
+        <figure>
+            <img src="fig09_calibration_by_tournament.png" alt="Actual goals vs xG for 2018, 2022 and both combined; 2018 under by ~16, 2022 over by ~13, combined near perfect">
+            <figcaption><strong>Figure 3.</strong> Aggregate calibration by tournament. 2018 teams under-scored their xG by ~9% (157 vs 173); 2022 teams over-scored by ~8% (169 vs 156); the two errors very nearly cancel, leaving the combined total almost exactly calibrated.</figcaption>
+        </figure>
+
+        <p>But Figure 3 also contains the warning. Each <em>individual</em> tournament misses by about 9% &mdash; and in opposite directions. The accuracy is a property of the aggregate, not of any single slice. The same holds shot by shot: bin every non-penalty shot by its predicted xG and the actual conversion rate tracks the prediction almost exactly, deviating only on the very best chances.</p>
+
+        <figure>
+            <img src="fig07_calibration_curve.png" alt="Shot-level calibration curve hugging the 45-degree line">
+            <figcaption><strong>Figure 4.</strong> Shot-level calibration (non-penalty shots). Each point is a bin of shots; the dashed line is perfect calibration. The curve hugs the diagonal &mdash; the model&rsquo;s probabilities mean what they say.</figcaption>
+        </figure>
+
+        <p>A simple regression of team-match goals on team-match xG tells the same story: <code>goals = 0.23 + 0.81 &middot; xG</code>, and a joint test of the ideal benchmark (intercept = 0, slope = 1) is not rejected at the 5% level (p = 0.076). xG is, to a good approximation, an unbiased predictor of goals.</p>
+
+        <p>The conclusion is the key one for everything that follows: <strong>xG is well calibrated in aggregate, but noisy in small samples.</strong> It is a trustworthy expected-value benchmark over a season or a whole tournament &mdash; and a poor oracle for any single match, where the realized goals can sit far from the expectation. That noise is not a defect to apologise for; in a moment it becomes the main subject. But first, what does this benchmark add over the cruder thing we already had?</p>
+
+        <h2>4. What xG reveals that shot counts do not</h2>
+
+        <p>Before xG, the standard shorthand for &ldquo;who was on top&rdquo; was the shot count. Türkiye&rsquo;s 32-to-7 edge is exactly that kind of statistic. The trouble is that shots are raw quantity: a tap-in and a hopeful effort from forty yards both count as one. xG exists to replace quantity with quality-adjusted quantity &mdash; and the difference shows up immediately in how well each tracks goals.</p>
+
+        <figure>
+            <img src="fig10_correlation_levels.png" alt="Correlation with goals: xG team-match 0.53, xG team-tournament 0.84, shot count 0.25">
+            <figcaption><strong>Figure 5.</strong> Correlation of each measure with actual goals. Quality-adjusted xG tracks goals more than twice as tightly as raw shot count (0.53 vs 0.25 at the match level), and tighter still once aggregated over a tournament (0.84) as the match-to-match noise averages out.</figcaption>
+        </figure>
+
+        <p>Shot count carries surprisingly little signal (correlation 0.25 with goals); xG carries roughly twice as much (0.53), and much more once aggregated (0.84). The reason is exactly the Türkiye game. <strong>Thirty-two shots did not mean thirty-two dangerous chances.</strong> At about 0.07 xG per attempt, most were low-value efforts forced from distance against a packed, ten-man defence. Shot count said Türkiye overwhelmed Paraguay; xG said the chances were mostly weak &mdash; and on that point, the scoreline agreed with xG, not with the shot count.</p>
+
+        <p>So xG is both trustworthy on average and genuinely more informative than the quantity measures it replaces. That makes it a benchmark worth subtracting from goals &mdash; which returns us to the residual. When the realized output departs from the expected output, what is actually in that gap?</p>
+
+        <h2>5. Reading the residual: luck, skill, and incentives</h2>
+
+        <p>The residual <code>goals &minus; xG</code> is not one thing, and it is tempting to enumerate a dozen separate causes. It is more useful to sort them into three economic categories, in rough order of how much of the residual they explain.</p>
+
+        <h3>A. Mostly noise</h3>
+
+        <p>The largest part of the residual is simply luck &mdash; the gap between an expected value and a single realized draw. Three pieces of evidence point the same way. xG predicts a single match only loosely (Section 3). The 2018 and 2022 aggregate errors were large and pointed in <em>opposite</em> directions, the signature of sampling noise rather than bias. And the distribution of <code>goals &minus; xG</code> across all team-tournaments is centred near zero and roughly symmetric:</p>
+
+        <figure>
+            <img src="fig02_hist_goals_minus_xg.png" alt="Histogram of goals minus xG at team-tournament level, centered near zero">
+            <figcaption><strong>Figure 6.</strong> Distribution of goals &minus; xG across team-tournaments &mdash; centred near zero (mean in red) and roughly symmetric. Over- and under-performance look like noise around an accurate benchmark.</figcaption>
+        </figure>
+
+        <p>The cleanest demonstration is to ask how often the better chances actually win. Among decisive men&rsquo;s World Cup matches, the team with the higher xG won only <strong>65%</strong> of the time &mdash; better than the team with more shots (59%), but still leaving roughly a third of results to the side that created less.</p>
+
+        <figure>
+            <img src="fig11_predict_winner.png" alt="Higher xG picks the winner 65% of the time, more shots 59%">
+            <figcaption><strong>Figure 7.</strong> Which side won, in decisive men&rsquo;s World Cup matches. The higher-xG team won 65% of the time &mdash; informative, but wrong about a third of the time.</figcaption>
+        </figure>
+
+        <p>The interpretation is economic, not mystical. A team takes around 25 shots a match and a tournament lasts seven games; the law of large numbers, which would let outcomes settle onto expectations, never fully arrives. In a short tournament, a large share of the residual is irreducible randomness.</p>
+
+        <h3>B. Some persistent skill</h3>
+
+        <p>If the residual were <em>only</em> noise, it would not persist: a team&rsquo;s over-performance in one tournament would tell you nothing about the next. It mostly doesn&rsquo;t &mdash; but not entirely. Among the 24 teams that played both 2018 and 2022, the correlation of <code>goals &minus; xG</code> across the two is <strong>0.32</strong>: weak, but positive.</p>
+
+        <figure>
+            <img src="fig04_over_under_performers.png" alt="Top 10 over- and under-performers by goals minus xG">
+            <figcaption><strong>Figure 8.</strong> Team-tournaments ranked by goals &minus; xG. France and Portugal beat their xG in <em>both</em> tournaments; Brazil and Germany fell short in both &mdash; the thin persistent layer beneath the noise.</figcaption>
+        </figure>
+
+        <p>The persistence has recognisable faces: France (+3.2 then +4.2) and Portugal stayed above their xG across both tournaments, while Brazil (&minus;4.3 then &minus;2.5) and Germany (&minus;4.3 then &minus;2.2) stayed below. Most over-performance is variance, but a thin layer reflects something real and team-specific &mdash; elite finishing, or elite goalkeeping at the other end &mdash; productivity the average-shooter benchmark cannot see and so leaves in the residual.</p>
+
+        <h3>C. Some structured selection and incentives</h3>
+
+        <p>The final piece is the most economic: teams do not generate shots at random; they choose them under incentives, and the World Cup is a selected, strategic environment. Three signs of this. <strong>Match state:</strong> a side chasing the game shoots from anywhere while a side protecting a lead concedes only difficult chances &mdash; Türkiye&rsquo;s 32 forced attempts are the fingerprint. <strong>Selection by round:</strong> knockout teams take more shots of slightly lower quality, yet over-convert their xG, because the sides that survive are disproportionately the elite finishers and keepers the benchmark under-prices.</p>
+
+        <figure>
+            <img src="fig05_group_vs_knockout.png" alt="Group vs knockout: similar xG, lower xG per shot in knockouts, but positive goals-minus-xG in knockouts">
+            <figcaption><strong>Figure 9.</strong> Group vs knockout (men&rsquo;s WC 2018 + 2022). Knockout teams take more shots of slightly lower quality per shot (0.098 vs 0.106), yet over-convert their xG (+0.19 vs &minus;0.07) &mdash; selection of the survivors.</figcaption>
+        </figure>
+
+        <p>(<strong>Penalties</strong>, by contrast, are a near-fixed &asymp;0.79 chance and turn out to be well-behaved: 12.4% of xG and 12.0% of goals, so they neither inflate nor distort the residual.) The lesson is that part of the gap is not luck at all but behaviour &mdash; chances created and conceded under strategic pressure that the benchmark, reading only geometry, cannot fully price.</p>
+
+        <p>Noise, a thin layer of skill, and a structured layer of selection and incentives: that is the whole residual. These three forces matter most when they collide in a single result that the scoreline cannot explain on its own &mdash; the upset.</p>
+
+        <h2>6. Two kinds of upset</h2>
+
+        <p>This is where the framework pays off. Two upsets can share an identical scoreline and mean completely different things, and xG is what separates them:</p>
+
+        <ul>
+            <li><strong>The deserved upset.</strong> The underdog wins <em>and</em> creates comparable or better chances. The residual is small; the result reflects the process. The favourite was simply outplayed.</li>
+            <li><strong>The high-variance upset.</strong> The underdog wins while being heavily out-chanced. The result sits in the tail of the residual &mdash; a great save, a clinical counter, and a lot of luck.</li>
+        </ul>
+
+        <p>The 2022 tournament gave a near-perfect controlled experiment in the form of one team: <strong>Japan</strong>. Japan beat <strong>Germany</strong> 2&ndash;1 while being out-chanced 1.25 xG to 2.77 &mdash; a high-variance upset. Days later Japan beat <strong>Spain</strong> 2&ndash;1 while <em>out</em>-chancing them, 1.16 to 0.86 &mdash; a deserved one. Same team, same scoreline, opposite meanings. <strong>Morocco</strong> knocking out <strong>Portugal</strong> 1&ndash;0 in the quarter-final (0.97 xG to 0.74) was deserved; <strong>Saudi Arabia</strong> beating eventual champions <strong>Argentina</strong> 2&ndash;1 on 0.15 xG to 2.49 was the purest high-variance shock of the tournament. Across all decisive men&rsquo;s matches, the lower-xG side won fully <strong>35%</strong> of the time.</p>
+
+        <figure>
+            <img src="fig03_goaldiff_vs_xgdiff.png" alt="Scatter of match goal difference vs xG difference; upsets live in the off-diagonal quadrants">
+            <figcaption><strong>Figure 10.</strong> Goal difference against xG difference (one row per team-match). Deserved results lie along the diagonal; the high-variance upsets are the points in the upper-left, where a team won the game while losing the chances.</figcaption>
+        </figure>
+
+        <p>The distinction matters because it tells you what to <em>infer</em> from a result. A deserved upset is evidence the favourite was overrated. A high-variance upset is evidence of almost nothing about the future &mdash; a coin landing on its edge, no more likely to recur next time. Crucially, <strong>xG does not tell us who morally deserved to win. It tells us what the scoreline is evidence of.</strong> Argentina, shocked by Saudi Arabia, went on to win the World Cup; the upset was noise, and xG said so in advance.</p>
+
+        <p>Which returns us to Türkiye and Paraguay. By the scoreline, Paraguay won and deserved their place &mdash; that is settled. By the residual, it was a high-variance upset: a 0.3-xG performance that beat a 2.1-xG one. The result is real, but it is weak evidence about which team was better, and a rematch would most likely look nothing like it. The scoreline decided the tie. xG tells us how much to read into the decision.</p>
+
+        <h2>7. Conclusion: the scoreline is final, not complete</h2>
+
+        <p>Return to the identity the post was built on:</p>
+
+        <p class="equation">Goals &nbsp;=&nbsp; xG &nbsp;+&nbsp; Residual</p>
+
+        <p>The scoreline reports the left-hand side and nothing else. xG supplies the first term on the right &mdash; the quality of chances, a benchmark we have seen is trustworthy in aggregate though noisy in any single match. The residual is everything else: mostly luck, a thin layer of genuine skill, and a structured layer of selection and incentive. The scoreline is the realized outcome; xG reveals the expected output behind it; and the gap between them is where the interesting economics lives.</p>
+
+        <p>So the answer to the opening question is that the scoreline is <strong>final, not complete.</strong> It decides who advances and who goes home, and nothing here disputes a single result. But on its own it cannot tell you whether a win was earned or borrowed from variance, whether a team is good or merely lucky, whether an upset will recur or never happen again. <strong>The scoreline decides the World Cup; xG tells us how to interpret what the scoreline decided.</strong></p>
+
+        <p>And that is exactly why the tournament grips us. In a sport this low-scoring, decided over so few games, the residual is large enough to overturn the expected output on any given night &mdash; to send the team with 2.1 expected goals home and the team with 0.3 through. The scoreline is final. The residual is where history is actually made.</p>
+
+        <hr>
+
+        <h2>Appendix</h2>
+
+        <p><strong>Process quality: who created and suppressed the best chances.</strong> Stripping out volume and outcomes, xG per shot ranks pure chance quality. Switzerland and Poland (2022) created the best chances per shot; Argentina (2022) paired elite quality with elite volume on the way to the title. At the other end, Uruguay (2018) and Brazil (both years) forced opponents into the weakest shots, while Panama and Tunisia (2018) leaked high-value chances and exited early.</p>
+
+        <figure>
+            <img src="fig12_xg_per_shot_attack_defense.png" alt="Left: teams with highest own xG per shot. Right: teams allowing the lowest opponent xG per shot.">
+            <figcaption><strong>Figure 11.</strong> Process quality (team-tournaments with &ge;20 shots). <em>Left:</em> best chance quality created (own xG per shot). <em>Right:</em> best defenses &mdash; opponents forced into the weakest shots (lowest opponent xG per shot).</figcaption>
+        </figure>
+
+        <p><strong>Robustness &mdash; the Women&rsquo;s World Cup.</strong> The same exercise on the Women&rsquo;s World Cup 2019 and 2023 gives the same headline: xG is well calibrated in aggregate (2019: goals/xG = 1.005; 2023: 0.939), with one tournament slightly above the line and one slightly below. Two independent competitions, the same pattern of an unbiased-but-noisy benchmark &mdash; the argument is not an artifact of the men&rsquo;s data.</p>
+
+        <hr>
+
+        <p class="footer-meta"><em>Note: this article was developed with the help of an AI assistant for the data pipeline, exploratory analysis, and drafting. All design choices, interpretation, and final wording are mine. Analysis data are from StatsBomb Open Data; the 2026 Türkiye&ndash;Paraguay figures are from Opta via The Analyst. This post is not affiliated with or endorsed by either provider.</em></p>
+
+    </main>
+    <script src="../../js/script.js"></script>
+</body>
+</html>
