@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point Shaving in the NBA: Fact or Fiction? &mdash; Feiyu Wang</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../research.html">Research</a></li>
+                <li><a href="../../blogs.html" class="active">Blogs</a></li>
+                <li><a href="../../others.html">Others</a></li>
+                <li><a href="../../cv.html">CV</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="post">
+        <p class="back-link"><a href="../../blogs.html">&larr; Back to Blogs</a></p>
+
+        <h1>Point Shaving in the NBA: Fact or Fiction? A Behavioral Test on 2025-26 Regular Season</h1>
+        <p class="entry-meta">2026-05-25 &middot; Feiyu Wang<span class="post-views" hidden></span></p>
+
+        <figure style="margin: 1.5em 0;">
+            <img src="hero_referee.jpg" alt="Basketball referee holding a basketball"
+                 style="width: 100%; height: auto; max-height: 420px; object-fit: cover; border-radius: 4px;">
+            <figcaption style="font-size: 0.8em; color: #888; text-align: right; margin-top: 0.3em;">
+                Photo by <a href="https://unsplash.com/@lesliwhitecotton" style="color: #888;">Lesli Whitecotton</a> on <a href="https://unsplash.com/photos/a-person-in-a-referee-shirt-holding-a-basketball-q1Q8H1n1lkY" style="color: #888;">Unsplash</a>.
+            </figcaption>
+        </figure>
+
+        <h2>Motivation</h2>
+
+        <p>Point shaving is one of the oldest suspicions in American sports. A player or referee, the story goes, doesn&rsquo;t need to throw a game outright &mdash; just nudge the final margin enough to flip which side of the closing line the bettors land on. The most famous documented case is the Tim Donaghy referee scandal of 2007. Whether shaving exists at any systematic level is harder to study than it looks: a signal at the margin would be hidden inside the normal end-of-game scramble of intentional fouls, timeouts, and clock management.</p>
+
+        <p>The empirical literature on this question (Wolfers 2006; Bernhardt &amp; Heston 2010; Paul &amp; Weinbach 2009; Borghesi 2015; Gregory 2018) examines the distribution of final outcomes around the closing line and finds no widespread shaving signal. This post takes a different angle: rather than test final-outcome distributions, it uses in-game behavioral data &mdash; L2M play-by-play counts of points, shots, free throws, fouls, turnovers, timeouts, and substitutions &mdash; and asks whether behavior deviates from baseline near the closing total in the direction shaving would produce. The test runs on the over/under market with a design tailored to a basic fact about shaving incentives: the direction of pressure (push the over vs push the under) varies game by game, so the right test is not a single fixed-direction regression.</p>
+
+        <p><strong>Headline result.</strong> Games whose live total at 2:00 is well below the closing total show statistically detectable elevation of L2M disruption activity &mdash; substitutions, timeouts, and free-throw attempts &mdash; compared to games where the over is already locked in. The pattern is what a push-the-over shaving operation would produce. After adding a control for game pace through the first 43 minutes the effects shrink to statistical marginality but do not vanish. The right reading is a <strong>correlation worth documenting, not a causal claim about corruption.</strong></p>
+
+        <h2>Data</h2>
+
+        <p>The panel is every regular-season and play-in game of the NBA 2025-26 season for which I could match a closing line to play-by-play: <strong>1,231 games</strong> with full play-by-play across all 30 teams. Sources:</p>
+
+        <ul>
+            <li><strong>Closing odds</strong> &mdash; Action Network public JSON feed, 6 US sportsbooks. I use DraftKings as the primary line.</li>
+            <li><strong>Play-by-play</strong> &mdash; Basketball-Reference. Every event in the last 5 minutes of regulation (and the last 2 minutes separately) is classified into scoring, shot attempts and makes, free throws, rebounds, assists, steals, blocks, turnovers, timeouts, substitutions, and fouls.</li>
+            <li><strong>Game meta</strong> &mdash; Basketball-Reference box scores: three officials per game, attendance, arena, inactive players, head coach.</li>
+        </ul>
+
+        <p>All scores below are <strong>end-of-regulation</strong> (overtime excluded). Define the live-state running variable <code>D = total_at_2min &minus; closing_total</code>.</p>
+
+        <h2>Descriptive evidence</h2>
+
+        <p>Start with the distribution of the final total relative to the closing total. The Wolfers-style shaving hypothesis predicts a missing or excess mass on one side of zero.</p>
+
+        <figure>
+            <img src="fig_total_dist.png" alt="Distribution of final total minus closing total">
+            <figcaption><strong>Figure 1.</strong> Distribution of the end-of-regulation total minus the closing total. The red dashed line is the closing total (0); the black dashed line is the sample median (&minus;1.5).</figcaption>
+        </figure>
+
+        <p>Bell-shaped around the closing total, with a sample median of &minus;1.5 &mdash; a small bias toward the under that is a well-documented feature of NBA closing totals. No visible Wolfers-style anomaly.</p>
+
+        <p>Combined-team L2M activity across pace-adjusted bins of the total:</p>
+
+        <figure>
+            <img src="fig_total_l2m.png" alt="Combined-team L2M activity across signed-total bins">
+            <figcaption><strong>Figure 2.</strong> Combined-team last-2-minute activity across pace-adjusted signed bins of the total. X-axis is the pace-adjusted distance to the closing total at 2:00 (0 = on pace to land on the line). Error bars are &plusmn;1 SEM.</figcaption>
+        </figure>
+
+        <p>Combined L2M FGA shows a dip in the bin just below the line (~7.1 at D&nbsp;=&nbsp;&minus;1.5 vs ~8.3 a bin further out), and combined L2M turnovers rises monotonically with D rather than spiking near zero. Read together with FTA &mdash; which trends similarly &mdash; the pattern is not &ldquo;fewer possessions near the line&rdquo; (turnovers don&rsquo;t spike) but &ldquo;same possessions, different mix,&rdquo; consistent with more intentional fouling in close-to-line games. Whether anything anomalous survives in regression form with controls is the question for the next section.</p>
+
+        <h2>The three-region behavioral test</h2>
+
+        <p>The right test of the direction-varying shaving hypothesis splits games into three regions of <code>D</code>:</p>
+
+        <table style="border-collapse: collapse; font-size: 0.9em; margin: 1em auto;">
+            <thead>
+                <tr style="border-bottom: 2px solid #222;">
+                    <th style="padding: 4px 12px; text-align: left;">Region</th>
+                    <th style="padding: 4px 12px;">D-range</th>
+                    <th style="padding: 4px 12px;">Push-UP shavers</th>
+                    <th style="padding: 4px 12px;">Push-DOWN shavers</th>
+                    <th style="padding: 4px 12px;">N</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td style="padding: 4px 12px;">DEEP</td>
+                    <td style="text-align: center; padding: 4px 12px;">D &le; &minus;10</td>
+                    <td style="text-align: center; padding: 4px 12px;">active</td>
+                    <td style="text-align: center; padding: 4px 12px;">dormant</td>
+                    <td style="text-align: center; padding: 4px 12px;">642</td></tr>
+                <tr><td style="padding: 4px 12px;">NEAR</td>
+                    <td style="text-align: center; padding: 4px 12px;">&minus;10 &lt; D &lt; 0</td>
+                    <td style="text-align: center; padding: 4px 12px;">dormant</td>
+                    <td style="text-align: center; padding: 4px 12px;">active</td>
+                    <td style="text-align: center; padding: 4px 12px;">240</td></tr>
+                <tr><td style="padding: 4px 12px;">OVER (reference)</td>
+                    <td style="text-align: center; padding: 4px 12px;">D &ge; 0</td>
+                    <td style="text-align: center; padding: 4px 12px;">dormant</td>
+                    <td style="text-align: center; padding: 4px 12px;">dormant</td>
+                    <td style="text-align: center; padding: 4px 12px;">311</td></tr>
+            </tbody>
+        </table>
+
+        <p>For each L2M outcome <code>y</code>, fit:</p>
+
+        <p class="equation">y<sub>g</sub> &nbsp;=&nbsp; &beta;<sub>DEEP</sub> &middot; <strong>1</strong>[D<sub>g</sub> &le; &minus;10] &nbsp;+&nbsp; &beta;<sub>NEAR</sub> &middot; <strong>1</strong>[&minus;10 &lt; D<sub>g</sub> &lt; 0] &nbsp;+&nbsp; X<sub>g</sub>'&theta; &nbsp;+&nbsp; &epsilon;<sub>g</sub></p>
+
+        <p>where <code>X</code> = (home margin at 2:00, closing total, <strong>live total at the 5:00 mark of Q4</strong> [pace through the first 43 minutes], home/away team FE, lead-official FE) and reference category is the OVER region. HC1-robust SEs. The live-total-at-5:00 control is the key piece for separating shaving from the mechanical &ldquo;low-pace games naturally have more dead-ball action&rdquo; alternative: conditional on how slowly a game has been played up to the 5:00 mark, the DEEP indicator captures only deviations from that established pace.</p>
+
+        <p>Outcomes classify into four types under the direction-varying shaving hypothesis: <strong>SAME-direction</strong> outcomes (both push-UP and push-DOWN want them ↑) should show elevation in both DEEP and NEAR; <strong>push-UP-only</strong> outcomes only in DEEP; <strong>push-DOWN-only</strong> only in NEAR; <strong>opposite-direction</strong> outcomes can go either way depending on which operation dominates.</p>
+
+        <table style="border-collapse: collapse; font-size: 0.9em; margin: 1em auto;">
+            <thead>
+                <tr style="border-bottom: 2px solid #222;">
+                    <th style="padding: 4px 12px; text-align: left;">Outcome</th>
+                    <th style="padding: 4px 12px; text-align: left;">Type</th>
+                    <th style="padding: 4px 12px;">&beta;<sub>DEEP</sub> (SE)</th>
+                    <th style="padding: 4px 12px;">&beta;<sub>NEAR</sub> (SE)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td style="padding: 4px 12px;">L2M timeouts</td>
+                    <td style="padding: 4px 12px;">SAME</td>
+                    <td style="text-align: right; padding: 4px 12px;">+0.344 (0.186)<sup>&dagger;</sup></td>
+                    <td style="text-align: right; padding: 4px 12px;">+0.092 (0.146)</td></tr>
+                <tr><td style="padding: 4px 12px;">L2M subs</td>
+                    <td style="padding: 4px 12px;">SAME</td>
+                    <td style="text-align: right; padding: 4px 12px;">+0.809 (0.486)<sup>&dagger;</sup></td>
+                    <td style="text-align: right; padding: 4px 12px;">+0.311 (0.389)</td></tr>
+                <tr><td style="padding: 4px 12px;">L2M turnovers</td>
+                    <td style="padding: 4px 12px;">push-UP only</td>
+                    <td style="text-align: right; padding: 4px 12px;">+0.062 (0.155)</td>
+                    <td style="text-align: right; padding: 4px 12px;">&minus;0.016 (0.124)</td></tr>
+                <tr><td style="padding: 4px 12px;">Avg L2M shot dist (ft)</td>
+                    <td style="padding: 4px 12px;">push-DOWN only</td>
+                    <td style="text-align: right; padding: 4px 12px;">+0.536 (0.618)</td>
+                    <td style="text-align: right; padding: 4px 12px;">+0.892 (0.489)<sup>&dagger;</sup></td></tr>
+                <tr><td style="padding: 4px 12px;">L2M points</td>
+                    <td style="padding: 4px 12px;">opposite</td>
+                    <td style="text-align: right; padding: 4px 12px;">+0.881 (0.671)</td>
+                    <td style="text-align: right; padding: 4px 12px;">&minus;0.114 (0.529)</td></tr>
+                <tr><td style="padding: 4px 12px;">L2M FGA</td>
+                    <td style="padding: 4px 12px;">opposite</td>
+                    <td style="text-align: right; padding: 4px 12px;">&minus;0.003 (0.406)</td>
+                    <td style="text-align: right; padding: 4px 12px;">&minus;0.110 (0.296)</td></tr>
+                <tr><td style="padding: 4px 12px;">L2M FTA</td>
+                    <td style="padding: 4px 12px;">opposite</td>
+                    <td style="text-align: right; padding: 4px 12px;">+0.784 (0.411)<sup>&dagger;</sup></td>
+                    <td style="text-align: right; padding: 4px 12px;">&minus;0.139 (0.343)</td></tr>
+                <tr><td style="padding: 4px 12px;">L2M fouls</td>
+                    <td style="padding: 4px 12px;">opposite</td>
+                    <td style="text-align: right; padding: 4px 12px;">+0.212 (0.225)</td>
+                    <td style="text-align: right; padding: 4px 12px;">&minus;0.070 (0.177)</td></tr>
+            </tbody>
+            <tfoot>
+                <tr><td colspan="4" style="padding-top: 8px; font-size: 0.8em; color: #666;">
+                    Each row from a separate regression with reference category D &ge; 0 (OVER region). Controls: home margin at 2:00, closing total, live total at the 5:00 mark, home/away team FE, lead-official FE. HC1-robust SEs. N = 1,193 per regression. *** = p &lt; 0.001; ** = p &lt; 0.01; * = p &lt; 0.05; &dagger; = p &lt; 0.10. Without the live-total-at-5:00 pace control, the timeouts and subs DEEP coefficients are statistically significant at <em>p</em> &lt; 0.001 (+0.50 and +0.91 respectively). The pace control absorbs roughly 15&ndash;30% of the point estimate and roughly doubles the standard errors, leaving the same direction at marginal significance.
+                </td></tr>
+            </tfoot>
+        </table>
+
+        <figure>
+            <img src="fig_three_region.png" alt="Three-region coefficient plot">
+            <figcaption><strong>Figure 3.</strong> Three-region coefficient plot. For each L2M outcome, the red circle is the DEEP-region coefficient (push-UP zone) and the blue square is the NEAR-region coefficient (push-DOWN zone), both relative to the D &ge; 0 reference. Horizontal bars are 95% CIs. The push-DOWN-only prediction is partially borne out for shot distance; the SAME-direction prediction is partially borne out for timeouts and subs but only in the DEEP cell.</figcaption>
+        </figure>
+
+        <p>Three patterns are worth flagging.</p>
+
+        <p><strong>The DEEP region (push-UP zone) shows marginal-but-meaningful elevation in disruption-of-play outcomes.</strong> Combined L2M timeouts are about 0.34 higher per game in the DEEP region than in the OVER reference, and combined L2M substitutions are about 0.81 higher. Both effects are large in magnitude (a roughly 30&ndash;35% increase over the OVER-region baseline) and consistent across the SAME-direction prediction, though they fall to <em>p</em> &asymp; 0.06&ndash;0.10 once the live-total-at-5:00 pace control is included. Combined L2M FTA is also marginally elevated in DEEP (+0.78, <em>p</em> = 0.06). These are the disruption outcomes the directionless-shaving prediction targeted.</p>
+
+        <p><strong>The NEAR region (push-DOWN zone) shows one consistent effect:</strong> games sitting just below the closing total have an average L2M shot distance about 0.9 ft longer (<em>p</em> = 0.07) than OVER-region baseline games. Longer shots are lower-percentage; this is consistent with deliberate bad-shot selection by a push-DOWN operation. None of the disruption outcomes (timeouts, subs) are elevated in NEAR, so the SAME-direction prediction is only half borne out.</p>
+
+        <p><strong>The push-UP-only prediction on turnovers fails.</strong> The framework predicted push-UP shavers would create extra turnovers (own team coughs up the ball, opponent scores in transition). The data show essentially zero effect on combined turnovers in DEEP (+0.06, n.s.), so this particular signal isn&rsquo;t there.</p>
+
+        <h2>Conclusion</h2>
+
+        <p><strong>This post finds something &mdash; a correlation, not a causal claim about shaving.</strong> Games whose live total at 2:00 of regulation is well below the closing total show a meaningful elevation of L2M disruption activity (timeouts, substitutions, free-throw attempts) compared to games where the over is already locked in. Games sitting just below the closing total show longer L2M shots than baseline. Both patterns are in the directions the direction-varying-shaving model predicts. After a control for game pace through the first 43 minutes the effects sit at marginal significance &mdash; same direction, similar magnitude, wider standard errors. That is the descriptive headline.</p>
+
+        <p>The reason this is a correlation rather than a causal claim is that the same DEEP-region pattern is consistent with at least three non-corruption explanations: (i) low-total games at 2:00 are <em>slow-pace</em> games with more dead-ball action than the pace control fully absorbs, in which case the residual elevation in disruption is mechanical; (ii) teams down by an unusual amount on pace may switch to a more open style in the L2M to give players touches or to draw fouls in the bonus, conditional on the live margin; (iii) refs may officiate clutch-game endings differently in low-pace games for reasons unrelated to gambling. The data here can&rsquo;t distinguish these from a push-UP shaving story. Distinguishing them would require additional design &mdash; a richer pace specification, a referee-by-referee split to see whether the effect concentrates in a few crews, or a game-by-game look at the DEEP cell to see whether the games driving the result are clustered in suspicious ways. Those are natural next steps and what the panel built here is designed to support.</p>
+
+        <p>Where this sits relative to the prior literature: the post-Wolfers consensus that <em>widespread</em> shaving is not detectable in standard outcome-distribution tests still holds; the behavioral approach used here doesn&rsquo;t overturn it. What it adds is a region-specific behavioral correlation that the outcome-distribution tests would miss, and that the no-shaving consensus should at least acknowledge before treating the question as fully settled.</p>
+
+        <p>None of this rules out shaving by specific players or specific officials in individual games. The Donaghy case is a reminder that &ldquo;the league average is clean&rdquo; is a different statement from &ldquo;no one is shaving.&rdquo; A targeted investigation of individual officials, applied to NBA referee-level fixed effects with the L2M Report grading data, is the natural next step.</p>
+
+        <p>A second caveat worth flagging: this analysis uses only the <strong>closing line</strong> as the reference, not the in-play lines that sportsbooks update continuously through the game. Three reasons. First, pre-game bets settle at the closing number, not the live one; a shaver paid through a pre-game wager is motivated by the closing line regardless of where the in-play line drifts. Second, roughly 70&ndash;80% of NBA handle is placed pre-game, so the closing line is where the rational shaving target lives. Third, the live line is mechanically derived from the current scoreboard &mdash; using it as the running variable would create a simultaneity problem with the very L2M behavior we are trying to explain. A hypothetical syndicate operating exclusively on in-play lines would not be detected by this design.</p>
+
+        <hr>
+
+        <p class="footer-meta"><em>Note: this article was developed with the help of an AI assistant for the data pipeline, exploratory analysis, and drafting. All design choices, interpretation, and final wording are mine.</em></p>
+
+    </main>
+</body>
+</html>
