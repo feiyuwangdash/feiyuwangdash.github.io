@@ -32,7 +32,7 @@ Then open `http://127.0.0.1:8000`. Check navigation, article links, and narrow m
 
 The research page contains the job market paper and two ongoing projects, with summaries drawn from current research files. Update the titles, summaries, and coauthors as the projects develop. Current drafts are available by email; add a paper link when a public version is ready.
 
-The CV download is `assets/cv.pdf`, an unchanged copy of the current one-page CV. Replace that file when updating the download and keep the education, research, teaching, and presentation details on the HTML pages in sync.
+The CV download is `assets/cv.pdf`, an unchanged copy of `Resume_Feiyu_DS.pdf` generated on November 1, 2026. The download keeps the original resume filename; versioned links refresh visitors’ cached copies. Replace that file when updating the download and keep the education, research, teaching, and presentation details on the HTML pages in sync.
 
 ## Deployment
 
