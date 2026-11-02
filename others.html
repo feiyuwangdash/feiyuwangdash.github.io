@@ -3,42 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Others &mdash; Feiyu Wang</title>
+    <meta name="description" content="Teaching appointments at Cornell and Peking University, summer programs, and interests beyond research.">
+    <title>Others — Feiyu Wang</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="site-brand" href="index.html">Feiyu Wang</a>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="research.html">Research</a></li>
                 <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="others.html" class="active">Others</a></li>
+                <li><a href="others.html" class="active" aria-current="page">Others</a></li>
                 <li><a href="cv.html">CV</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <h1>Others</h1>
-
-        <h2>Teaching</h2>
-        <ul>
-            <li>TA &mdash; AEM 3275/5275 &mdash; Introduction to Machine Learning in Business &mdash; 2026 Spring &mdash; Prof. Jingwei Zhang</li>
-            <li>TA &mdash; AEM 2500/ENVS 2500 &mdash; Environmental and Resource Economics &mdash; 2025 Fall &mdash; Prof. Ariel Ortiz-Bobea</li>
-            <li>TA &mdash; AEM 7100 &mdash; Econometrics I &mdash; 2025 Spring &mdash; Prof. Shanjun Li</li>
-            <li>TA &mdash; ECON 6090 &mdash; Microeconomic Theory I &mdash; 2024 Fall &mdash; Prof. David Easley</li>
-            <li>TA &mdash; ECON 6090 &mdash; Microeconomic Theory I &mdash; 2023 Fall &mdash; Prof. David Easley</li>
-        </ul>
-
-        <h2>Talks &amp; Service</h2>
-        <p>Conference presentations, refereeing, and service activities are being updated.</p>
-
-        <h2>Side Projects</h2>
-        <p>Details on side projects will be added soon.</p>
-
-        <h2>Personal</h2>
-        <p>Hobbies: marathon and triathlon.</p>
+    <main id="main-content" tabindex="-1">
+        <div class="page-heading"><h1>Others</h1></div>
+        <section class="content-section" aria-labelledby="teaching">
+            <h2 id="teaching">Teaching</h2>
+            <dl class="timeline">
+                <div class="timeline-row"><dt>Spring 2026</dt><dd><strong>Introduction to Machine Learning in Business</strong><span>Cornell · AEM 3275/5275 · Teaching assistant · Prof. Jingwei Zhang</span></dd></div>
+                <div class="timeline-row"><dt>Fall 2025</dt><dd><strong>Environmental and Resource Economics</strong><span>Cornell · AEM 2500/ENVS 2500 · Teaching assistant · Prof. Ariel Ortiz-Bobea</span></dd></div>
+                <div class="timeline-row"><dt>Spring 2025</dt><dd><strong>Econometrics I</strong><span>Cornell · AEM 7100 · Teaching assistant · Prof. Shanjun Li</span></dd></div>
+                <div class="timeline-row"><dt>Fall 2023 &amp; 2024</dt><dd><strong>Microeconomic Theory I</strong><span>Cornell · ECON 6090 · Teaching assistant · Prof. David Easley</span></dd></div>
+                <div class="timeline-row"><dt>Fall 2020 &amp; 2021</dt><dd><strong>Introductory Microeconomics</strong><span>Peking University · Teaching assistant · Prof. Zenan Wu</span></dd></div>
+            </dl>
+        </section>
+        <section class="content-section" aria-labelledby="programs">
+            <h2 id="programs">Summer programs</h2>
+            <p>In the summers of 2025 and 2026, I helped organize programs at Cornell’s CICER and Stanford’s eSET G-SIL serving more than 150 students. My work included developing economics, business, and sustainability curricula and a footwear-industry case competition.</p>
+        </section>
+        <section class="content-section" aria-labelledby="personal"><h2 id="personal">Beyond research</h2><p>Outside economics, I enjoy marathon running and triathlon. I also write about sports through the lens of economics and data on <a href="blogs.html">my blog</a>.</p></section>
     </main>
-    <script src="js/script.js"></script>
+    <footer class="site-footer">
+        <a href="index.html">Feiyu Wang</a>
+        <span>Cornell University</span>
+    </footer>
+    <script src="js/script.js" defer></script>
 </body>
 </html>

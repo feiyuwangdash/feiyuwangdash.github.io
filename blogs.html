@@ -3,43 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogs &mdash; Feiyu Wang</title>
+    <meta name="description" content="Essays by Feiyu Wang on economics, data, football, and distance running.">
+    <title>Blogs — Feiyu Wang</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="site-brand" href="index.html">Feiyu Wang</a>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="research.html">Research</a></li>
-                <li><a href="blogs.html" class="active">Blogs</a></li>
+                <li><a href="blogs.html" class="active" aria-current="page">Blogs</a></li>
                 <li><a href="others.html">Others</a></li>
                 <li><a href="cv.html">CV</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <h1>Blogs</h1>
-        <p class="subtitle">Notes on research, code, and assorted things I&rsquo;m thinking about.</p>
-
-        <div class="entry">
-            <h3><a href="posts/worldcup-xg/index.html">What Does the Scoreline Reveal? Expected Goals and the Economics of World Cup Upsets</a></h3>
-            <p class="entry-meta">2026-06-22</p>
-            <p>A World Cup scoreline tells us who won, but what does it reveal about how the match was played &mdash; and what does it hide? Starting from Türkiye 0&ndash;1 Paraguay (2.1 expected goals to 0.3, and a loss), I use the identity <em>Goals = xG + Residual</em> to separate what the scoreline records from what it conceals. Using StatsBomb shot-level data for the men&rsquo;s 2018 and 2022 tournaments, I show xG is a trustworthy benchmark in aggregate but noisy in small samples, then read the residual as three things &mdash; mostly luck, a thin layer of persistent skill, and a structured layer of selection and incentives. The payoff is a clean distinction between two upsets that share a scoreline but not a meaning: the deserved upset and the high-variance one. xG does not tell us who deserved to win; it tells us what the scoreline is evidence of.</p>
-        </div>
-
-        <div class="entry">
-            <h3><a href="posts/hakone-student-union/index.html">Why the Fastest Individuals Make the Slowest Team: Selection-on-Noise in the Hakone Ekiden Union Team</a></h3>
-            <p class="entry-meta">2026-05-14</p>
-            <p>Every January, the Hakone Ekiden fields a 21st &ldquo;all-star&rdquo; team composed of the ten fastest individual finishers at the prior qualifier whose own universities failed to qualify. On paper a top-tier team; in practice, famously slow. Using 11 editions (2015&ndash;2026), per-leg results for 1,600+ runner-legs, and personal-best half-marathon times, I rule out the fan &ldquo;mentality&rdquo; story via within-runner identification (the same runner runs about the same pace whether on the union team or their own college team), then walk through three guesses for what does explain the ~5-minute gap. Sandbagging is ruled out empirically; lucky-day selection (regression to the mean from picking on a single noisy race) accounts for roughly half; and the rest is a persistent runner-level gap whose exact channel the data can&rsquo;t isolate &mdash; plausible candidates are specialized Hakone training, leg-matching by a familiar coach, and course experience. A worked example of how selection on a noisy single measurement manufactures what looks like a behavioral pattern.</p>
-        </div>
-
-        <div class="entry">
-            <h3><a href="posts/uefa-referee-favoritism/index.html">Do UEFA Referees Favor Players From Their Own Country? An Econometric Look at Five Seasons of Champions League and Europa League</a></h3>
-            <p class="entry-meta">2026-05-07</p>
-            <p>The 2026 Bayern&ndash;PSG semifinal raised an old fan suspicion: does a referee call fewer fouls on his countrymen? Using FBref data on 1,531 UCL/UEL matches from 2021&ndash;22 to 2025&ndash;26, the descriptive comparison shows a 20% gap in fouls per 90 between same-country and other player-matches &mdash; but a two-way fixed-effect specification (player + match FE) erases it entirely. A team-level win-rate effect appears, then collapses once a club-quality control is added. A worked example of how a 20% raw gap can dissolve once you account for whom you&rsquo;re actually comparing.</p>
+    <main id="main-content" tabindex="-1">
+        <div class="page-heading"><h1>Blogs</h1></div>
+        <div class="archive">
+        <article class="writing-row" data-post="marathon-lottery-welfare">
+            <time datetime="2026-08-02">Aug 02, 2026</time>
+            <div><h2><a href="posts/marathon-lottery-welfare/index.html">Apply First, Decide Later?</a></h2>
+                <p class="entry-subtitle">The Welfare Economics of Marathon Lotteries in China</p><p class="entry-summary">Why runners apply to several races, and how payment, refund, and waitlist rules shape the allocation of scarce starting places.</p>
+            </div>
+        </article>        <article class="writing-row" data-post="worldcup-xg">
+            <time datetime="2026-06-22">Jun 22, 2026</time>
+            <div><h2><a href="posts/worldcup-xg/index.html">What Does the Scoreline Reveal?</a></h2>
+                <p class="entry-subtitle">Expected Goals and the Economics of World Cup Upsets</p><p class="entry-summary">What expected goals reveal about chance creation, luck, and the meaning of a football upset.</p>
+            </div>
+        </article>        <article class="writing-row" data-post="hakone-student-union">
+            <time datetime="2026-05-14">May 14, 2026</time>
+            <div><h2><a href="posts/hakone-student-union/index.html">Why the Fastest Individuals Make the Slowest Team</a></h2>
+                <p class="entry-subtitle">Selection on Noise in the Hakone Ekiden Union Team</p><p class="entry-summary">How selecting runners on a single noisy race can create a gap between individual results and team performance.</p>
+            </div>
+        </article>        <article class="writing-row" data-post="uefa-referee-favoritism">
+            <time datetime="2026-05-07">May 07, 2026</time>
+            <div><h2><a href="posts/uefa-referee-favoritism/index.html">Do UEFA Referees Favor Players From Their Own Country?</a></h2>
+                <p class="entry-subtitle">An Econometric Look at Five Seasons of Champions League and Europa League</p><p class="entry-summary">A raw gap in foul rates disappears once the comparison accounts for players and matches.</p>
+            </div>
+        </article>
         </div>
     </main>
-    <script src="js/script.js"></script>
+    <footer class="site-footer">
+        <a href="index.html">Feiyu Wang</a>
+        <span>Cornell University</span>
+    </footer>
+    <script src="js/script.js" defer></script>
 </body>
 </html>

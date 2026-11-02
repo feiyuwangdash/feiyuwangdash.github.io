@@ -3,44 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV &mdash; Feiyu Wang</title>
+    <meta name="description" content="Download Feiyu Wang’s CV and view education, research fields, presentations, teaching, and academic references.">
+    <title>Curriculum Vitae — Feiyu Wang</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="site-brand" href="index.html">Feiyu Wang</a>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="research.html">Research</a></li>
                 <li><a href="blogs.html">Blogs</a></li>
                 <li><a href="others.html">Others</a></li>
-                <li><a href="cv.html" class="active">CV</a></li>
+                <li><a href="cv.html" class="active" aria-current="page">CV</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <h1>CV</h1>
-        <p>Download the full PDF: <a href="assets/cv.pdf">cv.pdf</a> <span class="placeholder">(drop your CV PDF into <code>assets/</code> as <code>cv.pdf</code>)</span></p>
-
-        <h2>Education</h2>
-        <div class="entry">
-            <p><strong>Visiting PhD</strong> &mdash; Stanford Doerr School, 2026 Fall&ndash;2027 Summer</p>
-            <p><strong>PhD Candidate</strong> &mdash; Cornell University, Dyson School, 2022 Fall&ndash;present</p>
-            <p><strong>Visiting PhD</strong> &mdash; University of Wisconsin-Madison, Department of Economics, 2023 Fall</p>
-            <p><strong>Master of Finance</strong> &mdash; Peking University, School of Economics, 2019 Fall&ndash;2022 Summer</p>
-            <p><strong>Bachelor of Economics</strong> &mdash; Peking University, School of Economics, 2015 Fall&ndash;2019 Summer</p>
+    <main id="main-content" tabindex="-1">
+        <div class="page-heading">
+            <h1>Curriculum vitae</h1>
         </div>
-
-        <h2>Fields</h2>
-        <p>Empirical industrial organization, international trade, and quantitative marketing.</p>
-
-        <h2>References</h2>
-        <div class="entry">
-            <p>Prof. Shanjun Li &mdash; Doerr School of Sustainability, Stanford</p>
-            <p>Prof. Ezra Oberfield &mdash; Department of Economics, Cornell University</p>
-            <p>Prof. Adam Harris &mdash; Department of Economics, Cornell University</p>
-        </div>
+        <p><a class="text-link" href="assets/cv.pdf" download="Feiyu_Wang_CV.pdf">Download CV (PDF)</a></p>
+        <section class="content-section" aria-labelledby="education">
+            <h2 id="education">Education &amp; visits</h2>
+            <dl class="timeline">
+                <div class="timeline-row"><dt>2022–present</dt><dd><strong>PhD in Applied Economics and Management</strong><span>Cornell University · Dyson School</span><span>Expected June 2028 · Advisor: Shanjun Li</span></dd></div>
+                <div class="timeline-row"><dt>September 2026–present</dt><dd><strong>IvyPlus Exchange Scholar</strong><span>Stanford University · Doerr School of Sustainability</span></dd></div>
+                <div class="timeline-row"><dt>January–May 2024</dt><dd><strong>Visiting PhD Student</strong><span>University of Wisconsin–Madison · Department of Economics</span></dd></div>
+                <div class="timeline-row"><dt>2019–2022</dt><dd><strong>Master in Finance</strong><span>Peking University · School of Economics</span></dd></div>
+                <div class="timeline-row"><dt>2015–2019</dt><dd><strong>BA in Economics</strong><span>Peking University · Environmental and Resource Economics</span></dd></div>
+            </dl>
+        </section>
+        <section class="content-section" aria-labelledby="fields">
+            <h2 id="fields">Research fields</h2>
+            <p>Empirical industrial organization, environmental and energy economics, international trade, and quantitative marketing.</p>
+            <p><a href="research.html">Current research</a> includes work on negotiated trade protection, electric vehicle product portfolios, and consumer visit patterns.</p>
+        </section>
+        <section class="content-section" aria-labelledby="presentations">
+            <h2 id="presentations">Selected presentations</h2>
+            <dl class="timeline">
+                <div class="timeline-row"><dt>July 2026</dt><dd><strong>Chinese Economists Society China Annual Conference</strong><span>Chengdu</span></dd></div>
+                <div class="timeline-row"><dt>April 2026</dt><dd><strong>Cornell IO Student Workshop</strong></dd></div>
+                <div class="timeline-row"><dt>March 2025; April 2026</dt><dd><strong>Cornell SEERE Seminar</strong><span>PhD student presentations</span></dd></div>
+            </dl>
+        </section>
+        <section class="content-section" aria-labelledby="teaching">
+            <h2 id="teaching">Teaching &amp; mentoring</h2>
+            <p>I have served as a teaching assistant for graduate microeconomics and econometrics, environmental and resource economics, and machine learning at Cornell, and introductory microeconomics at Peking University. I have also mentored students on research projects and helped organize economics and sustainability summer programs at Cornell and Stanford.</p>
+            <p><a href="others.html#teaching">View teaching appointments</a></p>
+        </section>
+        <section class="content-section" aria-labelledby="skills">
+            <h2 id="skills">Technical skills &amp; languages</h2>
+            <p>Julia, Stata, Python, SQL/DuckDB, and LaTeX/Overleaf.<br>Chinese (native) and English (fluent).</p>
+        </section>
+        <section class="content-section" aria-labelledby="references">
+            <h2 id="references">References</h2>
+            <ul class="reference-list">
+                <li>Prof. Shanjun Li<span>Doerr School of Sustainability, Stanford University</span></li>
+                <li>Prof. Ezra Oberfield<span>Department of Economics, Cornell University</span></li>
+                <li>Prof. Adam Harris<span>Department of Economics, Cornell University</span></li>
+            </ul>
+        </section>
     </main>
-    <script src="js/script.js"></script>
+    <footer class="site-footer">
+        <a href="index.html">Feiyu Wang</a>
+        <span>Cornell University</span>
+    </footer>
+    <script src="js/script.js" defer></script>
 </body>
 </html>

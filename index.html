@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feiyu Wang</title>
+    <meta name="description" content="Feiyu Wang is a PhD candidate at Cornell University working on empirical industrial organization, environmental and energy economics, international trade, and quantitative marketing.">
+    <title>Feiyu Wang | Applied Economics</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="site-brand" href="index.html">Feiyu Wang</a>
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html" class="active" aria-current="page">Home</a></li>
                 <li><a href="research.html">Research</a></li>
                 <li><a href="blogs.html">Blogs</a></li>
                 <li><a href="others.html">Others</a></li>
@@ -18,22 +21,23 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <div class="profile">
-            <div class="profile-photo"><img src="assets/profile.jpg" alt="Feiyu Wang"></div>
-            <div>
-                <h1>Feiyu Wang</h1>
-                <p class="subtitle">PhD Candidate, Dyson School, Cornell University</p>
-                <p>I am a PhD candidate at the Dyson School working on empirical industrial organization, international trade, and quantitative marketing. In 2026–2027 I will be a visiting PhD student at the Stanford Doerr School, continuing these research interests with a focus on firm behavior and market structure across global and digital markets.</p>
+    <main class="home" id="main-content" tabindex="-1">
+        <div class="page-heading"><h1 id="profile-name">Feiyu Wang</h1></div>
+        <section class="hero" aria-labelledby="profile-name">
+            <figure class="profile-photo"><img src="assets/profile.jpg" alt="Feiyu Wang holding a goat on campus" width="3072" height="4096" fetchpriority="high"></figure>
+            <div class="hero-copy">
+                <p>I am a PhD candidate in Applied Economics and Management at Cornell University and an IvyPlus Exchange Scholar at the Stanford Doerr School of Sustainability.</p>
+                <p>My research interests are empirical industrial organization, environmental and energy economics, international trade, and quantitative marketing.</p>
+                <p>My email address is <a href="mailto:fw273@cornell.edu">fw273@cornell.edu</a>.</p>
+                <p>See my <a href="assets/cv.pdf">CV (PDF)</a> and <a href="research.html">current research</a>.</p>
+                <p>I also write about economics and sports on <a href="blogs.html">my blog</a>.</p>
             </div>
-        </div>
-
-        <h2>Contact</h2>
-        <ul class="contact-list">
-            <li>Email: <a href="mailto:fw273@cornell.edu">fw273@cornell.edu</a></li>
-            <li>GitHub: <a href="https://github.com/feiyuwangdash">feiyuwangdash</a></li>
-        </ul>
+        </section>
     </main>
-    <script src="js/script.js"></script>
+    <footer class="site-footer">
+        <a href="index.html">Feiyu Wang</a>
+        <span>Cornell University · <a href="https://github.com/feiyuwangdash">GitHub</a></span>
+    </footer>
+    <script src="js/script.js" defer></script>
 </body>
 </html>

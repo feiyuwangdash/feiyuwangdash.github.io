@@ -3,52 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research &mdash; Feiyu Wang</title>
+    <meta name="description" content="Research by Feiyu Wang on negotiated trade protection, electric vehicle product portfolios, and consumer visit patterns.">
+    <title>Research — Feiyu Wang</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="site-brand" href="index.html">Feiyu Wang</a>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="research.html" class="active">Research</a></li>
+                <li><a href="research.html" class="active" aria-current="page">Research</a></li>
                 <li><a href="blogs.html">Blogs</a></li>
                 <li><a href="others.html">Others</a></li>
                 <li><a href="cv.html">CV</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <h1>Research</h1>
-
-        <h2>Job Market Paper</h2>
-        <div class="entry">
-            <h3>[Paper title]</h3>
-            <p class="entry-meta">[Date] &middot; [Co-authors, if any]</p>
-            <p class="placeholder">Abstract placeholder. Replace with the JMP abstract.</p>
-            <p>[<a href="#">PDF</a>] &middot; [<a href="#">Slides</a>] &middot; [<a href="#">SSRN</a>]</p>
+    <main id="main-content" tabindex="-1">
+        <div class="page-heading">
+            <h1>Research</h1>
         </div>
-
-        <h2>Working Papers</h2>
-        <div class="entry">
-            <h3>[Working paper title]</h3>
-            <p class="entry-meta">[Date] &middot; with [Co-authors]</p>
-            <p class="placeholder">One-paragraph summary placeholder.</p>
-            <p>[<a href="#">PDF</a>]</p>
-        </div>
-
-        <h2>Work in Progress</h2>
-        <div class="entry">
-            <h3>[Project title]</h3>
-            <p class="entry-meta">with [Co-authors]</p>
-            <p class="placeholder">Short description placeholder.</p>
-        </div>
-
-        <h2>Publications</h2>
-        <div class="entry">
-            <p class="placeholder">List published papers here, in reverse chronological order.</p>
-        </div>
+        <section class="content-section research-section" aria-labelledby="job-market">
+            <h2 id="job-market">Job market paper</h2>
+            <article class="research-paper" aria-labelledby="negotiated-trade">
+                <h3 id="negotiated-trade">Negotiated Trade Protection: Minimum Import Prices and Quantity Commitments</h3>
+                <details class="paper-abstract"><summary>Abstract<span class="sr-only">: Negotiated Trade Protection: Minimum Import Prices and Quantity Commitments</span></summary><p>I study how negotiated alternatives to tariffs affect firm incentives, consumer demand, and the distribution of surplus. I combine a three-stage proposal, acceptance, and pricing game with a random-coefficients demand model and multiproduct price competition in the European electric vehicle market. In the counterfactuals, quantity commitments yield slightly higher exporter profits than minimum import prices, while minimum import prices deliver higher social welfare and EV sales.</p></details>
+            </article>
+        </section>
+        <section class="content-section research-section" aria-labelledby="ongoing">
+            <h2 id="ongoing">Work in progress</h2>
+            <div>
+                <article class="research-paper" aria-labelledby="targeted-tariffs">
+                    <h3 id="targeted-tariffs">Targeted Tariffs and Product Portfolios: Evidence from the European Electric Vehicle Market</h3>
+                    <details class="paper-abstract"><summary>Abstract<span class="sr-only">: Targeted Tariffs and Product Portfolios: Evidence from the European Electric Vehicle Market</span></summary><p>Where does tariff incidence appear when a policy covers only part of a firm’s portfolio? I study the EU’s duties on Chinese-built battery-electric vehicles using model-by-country registrations and annual posted prices for 2023–2025. EU markets record 6.2 fewer Chinese-built BEV models per destination-month relative to comparison markets, measured by active registration spells. Holding model reference prices fixed, the registered product mix shifts toward higher-priced vehicles, with a 12.1% increase in the German-reference index. These findings document adjustment in product-market presence and the composition of registrations.</p></details>
+                </article>
+                <article class="research-paper" aria-labelledby="sequential-visits">
+                    <h3 id="sequential-visits">Sequential Visits: Measuring Consumer Visit Patterns</h3>
+                    <p class="paper-coauthors">With Sandeep Chitla, Jingwei Zhang, and Ruihao Zhu</p>
+                    <details class="paper-abstract"><summary>Abstract<span class="sr-only">: Sequential Visits: Measuring Consumer Visit Patterns</span></summary><p>We study how to measure habitual consumer visits using mobile-location data. Using 1.03 billion visit records spanning 15 months, we compare repeat visits to the same location with visits to different locations. Sharp weekly timing patterns appear in both groups, showing that weekly recurrence alone does not identify habitual return behavior. This comparison guides the construction of samples for studying consumer visit patterns.</p></details>
+                </article>
+            </div>
+        </section>
+        <section class="content-section research-section" aria-labelledby="fields">
+            <h2 id="fields">Research interests</h2>
+            <div>
+                <p>Empirical industrial organization, environmental and energy economics, international trade, and quantitative marketing.</p>
+                <p>For current drafts and research inquiries, please <a href="mailto:fw273@cornell.edu?subject=Research%20inquiry">contact me</a>.</p>
+            </div>
+        </section>
     </main>
-    <script src="js/script.js"></script>
+    <footer class="site-footer">
+        <a href="index.html">Feiyu Wang</a>
+        <span>Cornell University</span>
+    </footer>
+    <script src="js/script.js" defer></script>
 </body>
 </html>
